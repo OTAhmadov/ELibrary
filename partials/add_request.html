@@ -1,0 +1,250 @@
+<div class="basic-info add-aut-page">
+    <div class="search-butons" style="margin: 0; float: none">
+        <button data-i18n="ok" type="submit" class="btn btn-primary" id="confirmRequest" >OK</button>
+        <button data-i18n="close" type="submit" class="btn btn-primary btn-block close-add-resource">Bağla</button>
+    </div>
+
+</div>
+<div class="row">
+    <div class="form-group">
+        <div class="row">
+            <form class="request-form">
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label >İstifadəçi adı:</label>
+                        <input data-i18n="username" id="person_user_name" placeholder="İstifadəçi adı" disabled>
+                        <input type="hidden" id="person_id" name="personId">
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label >S.A.A</label>
+                        <input data-i18n="placeholder.search" id="person_name" placeholder="S.A.A" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label >Fin kod:</label>
+                        <input data-i18n="placeholder.search" id="pincode" placeholder="Fin kod" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label >Doğum tarixi:</label>
+                        <input data-i18n="placeholder.search" id="person_birthday" placeholder="Doğum tarixi" disabled>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="panel-heading">
+                            <div id="add-res-for-read" style="right: 0px;">
+                                <h3 data-i18n="added_resources" class="panel-title"></h3>
+                                <div id="add-edition-image"><img src="assets/img/AddNew.png" alt="" width="20" height="20"></div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-md-12">
+                        <div id="append_read" class="panel-body add-read" style="padding: 0">
+                        </div>
+                    </div>            
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- --------------------------------------------------edition------------------------------------------------------------->
+    <div class="modal res-for-read-modal add-page" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 data-i18n="add_resources" class="modal-title">Nəşri məlumatlar</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form class="request-filt-form">    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Dil</label>
+                                <div class="prepend-icon">
+                                    <select class="form-control res_language" id="request-resLang" placeholder="" name="langId"></select>
+                                    <i class="fa fa-list-alt"></i>
+                                    <input type="hidden" id="resource_id" name="resId">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Müəllif</label>
+                                <div class="prepend-icon">
+                                    <select class="form-control res_author" id="request-author" placeholder="" name="authorId"></select>
+                                    <i class="fa fa-list-alt"></i>
+                                    <!--                            <input type="hidden" id="resource_id" name="resId">-->
+                                </div>
+                            </div>    
+                        </div>       
+                    </form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Resurs:</label>
+                                <div class="prepend-icon">
+                                    <select class="form-control" id="request-res" placeholder="" resource-edition-required name="resourceId"></select>
+                                    <i class="fa fa-list-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label placeholder="Verilmə tarixi">Verilmə tarixi:</label>
+                                <div class="prepend-icon">
+                                    <input type="text" maxlength="10" class="form-control datepicker" resource-edition-required="" data-date-format="dd/mm/yyyy" id="start_date"  placeholder="Verilmə tarixi" name="startDate">
+                                    <i class="fa fa-file-text-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Bitiş tarix</label>
+                                <div class="prepend-icon">
+                                    <input type="text" maxlength="10" class="form-control datepicker" resource-edition-required="" data-date-format="dd/mm/yyyy" id="last_date"  placeholder="Qaytarılma tarixi" name="finishDate">
+                                    <i class="fa fa-file-text-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer flex-img">
+                    <button data-i18n="ok"  data class="btn btn-primary confirm-reading">OK</button>
+                    <button data-i18n="close" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        $(function () {
+            $('body').on('change', '#request-resLang, #request-author', function () {
+                var params = $('.request-filt-form').serialize();
+                Hsis.Proxy.getUnusuals(params, function (resources) {
+                    var html = '<option value="0">' + Hsis.dictionary[Hsis.lang]["select"] + '</option>'
+                    $.each(resources, function (i, v) {
+                        html += '<option value="' + v.id + '">' + v.resources + '</option>';
+                    });
+
+                    $('#request-res').html(html);
+                });
+            });
+
+            $('body').on('hidden.bs.modal', '.modal', function () {
+                $('body').find('#request-res').html('')
+            })
+
+            Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.RESLANG, 0, function (resLanguage) {
+                var html = Hsis.Service.parseDictionaryForSelect(resLanguage);
+
+                $('.res_language').html(html);
+
+            });
+            Hsis.Proxy.getAuthorsListForSelect(function (resAuthor) {
+                var html = '<option value="0">' + Hsis.dictionary[Hsis.lang]["select"] + '</option>';
+                if (resAuthor) {
+                    $.each(resAuthor, function (i, v) {
+                        html += '<option parent="' + v.parentId + '" code="' + v.code + '" value="' + v.id + '">' + v.authorName[Hsis.lang] + '</option>';
+                    });
+                }
+
+                $('.res_author').html(html);
+
+            });
+
+            Hsis.i18n();
+            $('.datepicker').datepicker();
+
+            $('body').on('click', '.close-add-resource', function () {
+
+                $('.add-new').css('right', '-100%');
+                return false
+            });
+
+            $('[data-dismiss="modal"]').on('click', function (event) {
+                $('.modal').modal('hide');
+            });
+
+
+            $("[resource-required-number]").keydown(function (e) {
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                        (e.keyCode >= 35 && e.keyCode <= 40)) {
+                    return;
+                }
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $('.main-content-upd').on('keypress', '#person_search', function (e) {
+                try {
+
+                    if (e.keyCode == 13) {
+                        var keyword = $('#person_search').val();
+
+                        if (keyword.trim().length > 2) {
+                            $('.btn-load-more').removeAttr('data-page');
+                            $('.resource-form input[name="keyword"]').val(keyword);
+                            var queryparams = $('.main-content-upd .resource-form').serialize();
+                            Hsis.Proxy.getResources('', queryparams);
+                        } else if (keyword.trim().length == 0) {
+
+
+                            $('.btn-load-more').removeAttr('data-page');
+                            $('.resource-form input[name="keyword"]').val('');
+                            var queryparams = $('.main-content-upd .resource-form').serialize();
+                            Hsis.Proxy.getResources('', queryparams);
+                        }
+                    }
+
+                } catch (err) {
+                    console.error(err);
+                }
+            });
+
+            $('body').on('click', '#add-res-for-read', function () {
+                $('body').find('#start_date').val('');
+                $('body').find('#last_date').val('');
+                $('body').find('#request_status').html('');
+                $('body').find('#request-res').html('');
+                $('.res-for-read-modal').find('input').val('');
+                $('.res-for-read-modal select').find('option:selected').prop('selected', false);
+                $('body').find('.confirm-reading').attr('data-type', 'add');
+                $('.res-for-read-modal').modal();
+
+            });
+
+        });
+
+    </script>
+
+
+    <!--                <div class="form-group col-md-12">
+                        <div class="form-group">
+                            <label  for ="group-name" >Tələbə/Müəllim</label>
+                            <div class="prepend-icon">
+                                <select class="form-control" id="person-type-select" placeholder="" resource-edition-required=""  >
+                                    <option value="student">Telebe</option>
+                                    <option value="teacher">Mellim</option>
+                                </select>
+                                <i class="fa fa-file-text-o"></i>
+                            </div>
+                        </div>
+                    </div>-->
+    <!--                <div class="form-group col-md-6">
+                        <div class="form-group">
+                            <label  for ="group-name" >Oxucu</label>
+                            <div class="">
+                                <select class="form-control select-with-search request-read-type" id="request-read" placeholder="" resource-edition-required=""  ></select>
+                              
+                            </div>
+                        </div>
+                    </div>-->
+

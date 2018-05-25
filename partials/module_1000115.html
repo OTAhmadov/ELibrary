@@ -1,0 +1,318 @@
+<div style="display: none; padding-right: 17px;" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" id="exportModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="modal-pdf col-md-4">
+                        <a class="export" data-value="pdf" href="#"><img class="a-export" src="assets/img/pdf-icon.png" width="150" height="150" alt="pdf"></a>
+                    </div>
+                    <div class="modal-excel col-md-4">
+                        <a class="export"  data-value="xls" href="#"><img class="a-export" src="assets/img/excel-icon.png" width="150" height="150" alt="xls"></a>
+                    </div>
+                    <div class="modal-html col-md-4">
+                        <a class="export" data-value="html" href="#"><img class="a-export" src="assets/img/html-icon.png" width="150" height="150" alt="html"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<form class="sabah-form">
+    <input name="educationPaymentTypeId" class="hidden" />
+    <input name="searchAttr" class="hidden" />
+</form>
+
+    <div class="content-header">
+        <div class="con-head-left">
+            <div id="resources-head">
+            <span placeholder="Resources" class="hed-title" id="elekbash">Kitabxana</span><span>(<span id="kitabsayi"></span>)</span><span  class="head-total"> <span data-student-count></span></span>
+        </div>
+        <div id="resalpha">
+            <a href="?oper=e_kitabxana&amp;alp=A" class="resalpha">A</a> - <a href="?oper=e_kitabxana&amp;alp=B" class="resalpha">B</a> - 
+            <a href="" class="resalpha">C</a> - <a href="" class="resalpha">Ç</a> - <a href="" class="resalpha">D</a> - <a href="" class="resalpha">E</a> - 
+            <a href="" class="resalpha">Ə</a> - <a href="" class="resalpha">F</a> - <a href="" class="resalpha">G</a> - <a href="" class="resalpha">H</a> - 
+            <a href="" class="resalpha">X</a> - <a href="" class="resalpha">İ</a> - <a href="" class="resalpha">J</a> - <a href="" class="resalpha">K</a> - 
+            <a href="" class="resalpha">Q</a> - <a href="" class="resalpha">L</a> - <a href="" class="resalpha">M</a> - <a href="" class="resalpha">N</a> - 
+            <a href="" class="resalpha">O</a> - <a href="" class="resalpha">Ö</a> - <a href="" class="resalpha">P</a> - <a href="" class="resalpha">R</a> - 
+            <a href="" class="resalpha">S</a> - <a href="" class="resalpha">Ş</a> - <a href="" class="resalpha">T</a> - <a href="" class="resalpha">U</a> - 
+            <a href="" class="resalpha">Ü</a> - <a href="" class="resalpha">V</a> - <a href="" class="resalpha">Y</a> - <a href="" class="alfa">Z</a>
+        </div>
+     </div>        
+    <div class="con-head-right">
+        <div class="prepend-icon">
+            <input data-i18n="placeholder.search" id="res_search" type="search" placeholder="Search">
+        </div>
+        <button type="button" class="btn btn-default filter-res">Filter</button>
+        <div id="buttons_div" class="dropdown-func">
+            <div class="btn btn-default reg dropdown-toggle cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                Ümumi əməliyyatlar
+            </div>
+            <ul id="module_operations" class="dropdown-menu calibrated">
+            </ul>
+        </div>
+    </div>
+</div>
+<div class=" module_1000015">
+    <div class="filters-block">
+
+        <form class="resource-form">
+            <input id="alphakey" name="alphabet" hidden>
+            <input class="hidden" name = "keyword"/>
+            <div class="btn-group">
+                <select class="form-control" id="res_author_filter" name="author">
+                </select>
+            </div>
+            <div class="btn-group">
+                <select class="form-control" id="res_section_filter" name="sectionId">
+                </select>
+            </div>
+            <div class="btn-group">
+                <select class="form-control" id="res_bib_description" name="bibdescId">
+                </select>
+            </div>
+            <div class="btn-group">
+                <select class="form-control"  id="res_content" name="contentId">
+                </select>
+            </div>
+            <div class="btn-group">
+                <select class="form-control" id="res_format" name="formatId">
+                </select>
+            </div>
+            <div class="btn-group">
+                <select class="form-control" id="res_subject" name="subjectId">
+                </select>   
+            </div>
+            <div class="btn-group">
+                <select class="form-control" id="res_language" name="langId">
+                </select>   
+            </div>
+
+            <!--        <div class="btn-group">
+                        <select class="form-control" id="res_publish_country" name="publishPlace">
+            
+                        </select>   
+                    </div>-->
+        </form>
+
+    </div>
+</div>
+<!--//*-----------------------------FILTERS-------------------------//*-->
+
+<div class="col-sm-4 info res-info">
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <h3 data-i18n="info" class="panel-title" placeholder="Məlumat">Məlumat</h3>
+            <div class="panel-close"><img src="assets/img/upd/close.svg" alt=""></div>
+            <div class="type_2_btns"><div title="Əməliyyatlar" class="operations operations-top dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/img/upd/table-dots.svg"></div><ul class="dropdown-menu"><li><a id="operation_1000042" data-status="undefined" href="#">Təsdiq et</a></li><li><a id="operation_1000076" data-status="undefined" href="#">Şəxsi məlumatların redaktəsi</a></li><li><a id="operation_1000058" data-status="undefined" href="#">Əməkdaşa baxış</a></li><li><a id="operation_1000032" data-status="undefined" href="#">Əməkdaşın redaktəsi</a></li><li><a id="operation_1000033" data-status="undefined" href="#">Əməkdaşın silinməsi</a></li></ul></div>
+        </div>
+        <div class="panel-body">
+            <div class="col-xs-12 info-item student-name">
+                <div><span class="placespan"></span><span>  - </span><span class="datespan"></span></div>
+                <div><span class="keyspan">Dil: </span><span class="langspan"></span></div>
+                <div><span class="keyspan">Format: </span><span class="formatspan"></span></div>
+                <div><span class="keyspan">Məzmun: </span><span class="contentspan"></span></div>
+                <div><span class="keyspan">Predmet: </span><span class="subjectspan"></span></div>
+                <div><span class="keyspan">Biblioqrafiq təsvir: </span><span class="bibdesspan"></span></div>
+                <div><span class="keyspan">Səhifə sayı: </span><span class="pagecountspan"></span></div>
+                <div class="faylyukleyen hidden">Fayllar:
+                    <div class="user-doc-file">
+                        <div class="upload-img">
+                            <a class="resource_file" download="aaa">
+                                <img src="assets/img/upload-img.png" width="20" height="20">
+                            </a>   
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="data col-sm-12 restablediv">
+        <div class="panel panel-white table-scroll">
+            <!--        <div class="main-div">-->
+            <table class="table table-celled" id="restable">
+                <thead>
+                    <tr>
+                        <th>Nö</th>
+                        <th>Adı</th>
+                        <th>Müəllif</th>
+                        <th>Şöbə</th>
+                        <th>Sayı</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="space-for-footer">
+                <div id="load_more_div" class="flex-input">
+                    <button data-i18n="load.more" data-table="catalogue" class="btn loading-margins btn-load-more" placeholder="Daha çox">Daha çox</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    <div class="col-sm-12 data">
+        <div  class="table-scroll">  
+
+        </div>
+    </div>-->
+
+<div class="add-new">
+    <div class="search-scroll"></div>
+</div>
+<script src="assets/js/modal_drag.js"></script>
+<script src="assets/js/jquery-ui.js"></script>
+<script>
+    $(function () {
+        
+        $('#muraciets').on('click', function () {
+            Hsis.Proxy.getRequest();
+        })
+
+        $('#res_author_filter').select2({
+            placeholder: "Müəllif",
+            minimumInputLength: 3,
+            ajax: {
+                url: Hsis.urls.ELIBRARY + 'autselect?token=' + Hsis.token,
+                type: 'GET',
+                data: function (params) {
+                    return {
+                        keyword: params.term
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: $.map(data.data, function (item) {
+                            return {
+                                text: item.authorName[Hsis.lang],
+                                id: item.id,
+                                code: item.code
+                            }
+                        })
+                    };
+
+                }
+            }
+        });
+        $('body').find('.table-scroll').slimScroll();
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.BIBDESC, 0, function (resBibDescription) {
+            var html = Hsis.Service.parseDictionaryForSelect(resBibDescription);
+            $('#res_bib_description').html(html);
+            $('#res_bib_description option:first-child').text('Biblioqrafik Təsvir')
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.COUNTRY, 0, function (resPublishPlace) {
+            var html = Hsis.Service.parseDictionaryForSelect(resPublishPlace);
+            $('#res_publish_country').html(html);
+            $('#res_publish_country option:first-child').text('Nəşr yeri');
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.RESLANG, 0, function (resLanguage) {
+            var html = Hsis.Service.parseDictionaryForSelect(resLanguage);
+            $('#res_language').html(html);
+            $('#res_language option:first-child').text('Dil');
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.SUBJECT, 0, function (resSubject) {
+            var html = Hsis.Service.parseDictionaryForSelect(resSubject);
+            $('#res_subject').html(html);
+            $('#res_subject option:first-child').text('Predmet');
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.CONTENT, 0, function (resContent) {
+            var html = Hsis.Service.parseDictionaryForSelect(resContent);
+            $('#res_content').html(html);
+            $('#res_content option:first-child').text('Məzmun');
+
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.RESFORMAT, 0, function (resFormat) {
+            var html = Hsis.Service.parseDictionaryForSelect(resFormat);
+            $('#res_format').html(html);
+            $('#res_format option:first-child').text('Format');
+        });
+        
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.SECTION, 0, function (resSection) {
+            var html = Hsis.Service.parseDictionaryForSelect(resSection);
+            $('#res_section_filter').html(html);
+            $('#res_section_filter option:first-child').text('Şöbə');
+        });
+        
+        $('.search-scroll').slimScroll();
+        $('body').on('click', '.new-close', function () {
+            $('body').find('.new-upd').css('right', '-100%');
+        });
+
+        Hsis.Proxy.loadOperations(Hsis.currModule, function (operations) {
+            $('#buttons_div').find('ul').html(Hsis.Service.parseOperations(operations, 1));
+            Hsis.i18n(Hsis.lang);
+            //$('body').find('.table-scroll').slimScroll();
+            Hsis.Proxy.getResources();
+        });
+
+        $('#main-div .sub_modules_div').remove();
+        $('.module-list').find('.sub-module-con').remove();
+
+        Hsis.Proxy.loadDictionariesByTypeId(1000016, 0, function (eduLevels) {
+            if (eduLevels) {
+                var html = '';
+                $.each(eduLevels, function (i, v) {
+                    html += '<option value="' + v.id + '">' + v.value[Hsis.lang] + '</option>';
+                });
+                $('#edu_levels').html(html);
+            }
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId('1000002', 1000700, function (eduLevel) {
+            if (eduLevel) {
+                var html = '<option value="0">Hamısı</option>';
+                $.each(eduLevel, function (i, v) {
+                    html += '<option parent="' + v.parentId + '" code="' + v.code + '" value="' + v.id + '">' + v.value[Hsis.lang] + '</option>';
+                });
+                $('#main-div #org_spec_level_filter').html(html);
+            }
+        });
+
+        $('.modal-content').draggable();
+
+        //----------------------------------------------------------------------------------------------------Search--------------------------------------------------------------------------------------------------//
+
+        $('.main-content-upd').on('keypress', '#res_search', function (e) {
+            try {
+
+                if (e.keyCode == 13) {
+                    var keyword = $('#res_search').val();
+
+                    if (keyword.trim().length > 2) {
+                        $('.btn-load-more').removeAttr('data-page');
+                        $('.resource-form input[name="keyword"]').val(keyword);
+                        var queryparams = $('.main-content-upd .resource-form').serialize();
+                        Hsis.Proxy.getResources('', queryparams);
+                    } else if (keyword.trim().length == 0) {
+
+
+                        $('.btn-load-more').removeAttr('data-page');
+                        $('.resource-form input[name="keyword"]').val('');
+                        var queryparams = $('.main-content-upd .resource-form').serialize();
+                        Hsis.Proxy.getResources('', queryparams);
+                    }
+                }
+
+            } catch (err) {
+                console.error(err);
+            }
+        });
+
+    });
+
+</script>
+

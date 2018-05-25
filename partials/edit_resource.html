@@ -1,0 +1,467 @@
+<h1>Redaktə</h1>
+<div class="basic-info edit-page-res">
+    <div class="search-butons" style="margin: 0; float: none">
+        <button data-i18n="ok" type="submit" class="btn btn-primary" id="confirmAddRes" >OK</button>
+        <button data-i18n="close" type="submit" class="btn btn-primary btn-block close-add-resource">Bağla</button>
+    </div>
+
+</div>
+<div class="row">
+    <form class="add-resource-form">
+        <div class="form-group">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label  for ="group-name" >Adı</label>
+                        <div class="prepend-icon">
+                            <input  type="text" class="form-control" id="res-name" resource-required="" placeholder="Adı" name = "resourceName">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label  for="exampleInputEmail1" >Müəllif</label>
+                        <select multiple="" class="res_author" name="authorId" resource-required id="author-id">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label  for="group-name">ISBN (Beynəlxalq Standart Kitab Nömrəsi)</label>
+                        <div class="prepend-icon">
+                            <input  type="text" class="form-control" id="isbn" placeholder="ISBN" name="isbnCode">
+                             <!--resource-required=""-->
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label  for="group-name" >Seriya</label>
+                        <div class="prepend-icon">
+                            <select class="form-control res-serial" name="resCount" id="res_serial"></select>
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label>Şöbə</label>
+                        <div class="prepend-icon">
+                            <select class="form-control" id="adder_section" placeholder="" name="adderSection"></select>
+                            <i class="fa fa-list-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label  data-i18n="format">Format</label>
+                        <div class="prepend-icon">
+                            <select class="form-control res_format" resource-required="" name="formatId" id="format-id"></select>
+                            <i class="fa fa-list-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label  for="group-name" >Sayı</label>
+                        <div class="prepend-icon">
+                            <input  type="text" class="form-control res_count" placeholder="Sayı" resource-required name="resCount" resource-required-number id="res-count">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label>Biblioqrafik Təsvir</label>
+                        <div class="prepend-icon">
+                            <select class="form-control res_bib_description" name="bibdescId" id="bibdesc-id" ></select>
+                            <!--resource-required--> 
+                            <i class="fa fa-list-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label>Məzmun</label>
+                        <div class="prepend-icon">
+                            <select  class="form-control res_content" name="contentId" id="res-content"></select>
+                             <!--resource-required-->
+                            <i class="fa fa-list-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label>Nəşriyyat</label>
+                        <div class="prepend-icon">
+                            <input  type="text" class="form-control" placeholder="Çap yeri" name="publishPlace" id="publish-place-id">
+                            <i class="fa fa-list-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label>Dil</label>
+                        <div class="prepend-icon">
+                            <select class="form-control res_language" resource-required="" name="langId" id="lang-id"></select>
+                            <i class="fa fa-list-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label>Predmet</label>
+                        <div class="prepend-icon">
+                            <select class="form-control res_subject" resource-required="" name="subjectId" id="subject-id" ></select>
+                            <i class="fa fa-list-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel-heading">
+                        <div class="add-edition" style="right: 0px;">
+                            <h3 data-i18n="resources_other_info" class="panel-title"></h3>
+                            <div id="add-edition-image"><img src="assets/img/AddNew.png" alt="" width="20" height="20"></div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-md-12">
+                    <div id="append_edit_res_param" class="panel-body edit-page" style="padding: 0">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel-heading" style="padding: 0 0">
+                        <div class="add-compiler" style="right: 0px;">
+                            <h3 data-i18n="" class="panel-title">Tərtibat</h3>
+                            <div id="add-compile-image"><img src="assets/img/AddNew.png" alt="" width="20" height="20"></div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-md-12">
+                    <div id="append_compile_param" class="panel-body edit-page" style="padding: 0">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel-heading">
+                <label id="labId" class="hidden">
+                    <img id="shekil" src="assets/img/upload-img.png" width="20" height="20">
+                    <input type="file" class="new-add-doc-file hidden" accept="application/pdf">
+                    <button id="clear" class="hidden">Sil</button>
+                </label>
+                <div class="spaninklasi">                
+                    <span id="resfile" class="hidden"></span> 
+                    <span class="file-name"></span>
+                </div>
+           </div>    
+             </div>
+    </form>
+</div>
+
+<!------------------------------------------------------------------------------------------ -->
+
+<div class="modal  resource-edition-modal edit-page" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 data-i18n="resources_other_info" class="modal-title">Nəşri məlumatlar</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label  for="group-name" placeholder="Sayı">Səhifə sayı</label>
+                    <div class="prepend-icon">
+                        <input  type="text" class="form-control" id="res_page" placeholder="Səhifə sayı" edition-required="" resource-required-number name="pageCount">
+                        <i class="fa fa-file-text-o"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  for="group-name" placeholder="Tarix">Çap edilmə tarixi</label>
+                    <div class="prepend-icon">
+                        <input type="text" class="form-control datepicker" resource-edition-required="" data-date-format="dd/mm/yyyy" id="publish-date-id"  placeholder="Çap olunma tarixi" name="publishDate"  maxlength="10">
+                        <i class="fa fa-file-text-o"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  for="group-name" placeholder="Qiymət">Qiymət</label>
+                    <div class="prepend-icon">
+                        <input type="text" class="form-control" id="resource_price"  placeholder="Qiymət" name="resourcePrice">
+                        <i class="fa fa-file-text-o"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  for="group-name">Düzülüş şifrəsi</label>
+                    <div class="prepend-icon">
+                        <input type="text" class="form-control row-serial" id="row_serial"  placeholder="Düzülüş şifrəsi" name="rowSerial">
+                        <i class="fa fa-file-text-o"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer flex-img">
+                <button data-i18n="ok"  class="btn btn-primary confirm-res-param" data-type="edit">OK</button>
+                <button data-i18n="close" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal resource-compiler-modal edit-page" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 data-i18n="" class="modal-title">Tərtibat</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label  for="group-name">Tərtibatçı</label>
+                    <div class="prepend-icon">
+                        <select class="form-control res-compiler" id="res_compiler" name="resourceCompiler"></select>
+                        <i class="fa fa-file-text-o"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  for="group-name">S.A.A</label>
+                    <div class="prepend-icon">
+                        <input type="text" class="form-control res-compiler-name" id="res_compiler_name"  placeholder="S.A.A" name="compilerName">
+                        <i class="fa fa-file-text-o"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer flex-img">
+                <button data-i18n="ok" data class="btn btn-primary confirm-compile-param">OK</button>
+                <button data-i18n="close" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(function () {
+        Hsis.i18n();
+        $('.datepicker').datepicker();
+        
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.SECTION, 0, function (resSection) {
+            var html = Hsis.Service.parseDictionaryForSelect(resSection);
+            $('#adder_section').html(html);
+        });
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.SERIALTYPE, 0, function (resSerialType) {
+            var html = Hsis.Service.parseDictionaryForSelect(resSerialType);
+            $('#res_serial').html(html);
+        });
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.COMPILER, 0, function (resCompiler) {
+            var html = Hsis.Service.parseDictionaryForSelect(resCompiler);
+            $('.res-compiler').html(html);
+        });
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.BIBDESC, 0, function (resBibDescription) {
+            var html = Hsis.Service.parseDictionaryForSelect(resBibDescription);
+            $('.res_bib_description').html(html);
+        });
+        
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.RESLANG, 0, function (resLanguage) {
+            var html = Hsis.Service.parseDictionaryForSelect(resLanguage);
+            $('.res_language').html(html);
+        });
+        
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.SUBJECT, 0, function (resSubject) {
+            var html = Hsis.Service.parseDictionaryForSelect(resSubject);
+            $('.res_subject').html(html);
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.CONTENT, 0, function (resContent) {
+            var html = Hsis.Service.parseDictionaryForSelect(resContent);
+            $('.res_content').html(html);
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.RESFORMAT, 0, function (resFormat) {
+            var html = Hsis.Service.parseDictionaryForSelect(resFormat);
+            $('.res_format').html(html);
+        });
+
+        var resourceId = $('body').attr('data-resource-id');
+        Hsis.Proxy.getResourceDetails(resourceId, function (data) {
+            $('body').find('#res-name').val(data.resourcesName);
+            $('body').find('#isbn').val(data.isbn);
+            $('body').find('#lang-id').val(data.langId.id);
+            $('body').find('#res-count').val(data.resCount);
+            $('body').find('#adder_section').find('option[value="' + data.section.id + '"]').prop('selected', true);
+            $('body').find('#res_serial').find('option[value="' + data.seria.id + '"]').prop('selected', true);
+            $('body').find('#res-content').find('option[value="' + data.content.id + '"]').prop('selected', true);
+            $('body').find('#bibdesc-id').find('option[value="' + data.bibdesc.id + '"]').prop('selected', true);
+            $('body').find('#subject-id').find('option[value="' + data.subject.id + '"]').prop('selected', true);
+            $('body').find('#format-id').val(data.format.id);
+            if(data.format.id == 1008043){
+ 
+//                $('body').find('#pfayl').removeClass('hidden');
+                $('body').find('#resfile').removeClass('hidden');
+                $('body').find('#labId').removeClass('hidden');
+                if ($('body').find('#resfile').html()) {
+                        $('body').find('#clear').removeClass('hidden');
+                    }         
+            }else {
+                
+                $('body').find('#pfayl').addClass('hidden');
+                $('body').find('#resfile').addClass('hidden');
+                $('body').find('#labId').addClass('hidden');
+                $('body').find('.file-name').addClass('hidden');
+                }
+            $('body').find('#res_page').val(data.pageCount);
+            $('body').find('#publish-place-id').val(data.publishPlace)
+            $('body').find('#publish-date-id').val(data.publishDate);
+            $('body').find('#row_serial').val(data.resRowSerial)
+            $('body').find('#resource_price').val(data.resPrice);
+            $('body').find('#shekil').attr('data-image-id', (data.fileWrapper && data.fileWrapper.id ? data.fileWrapper.id : 0));
+            if (data.fileWrapper) {
+                
+                $('body').find('#resfile').attr({
+                    'data-id': data.fileWrapper.id,
+                    'data-path': data.fileWrapper.path
+                });
+                $('body').find('#resfile').html(data.fileWrapper.originalName);
+                $('body').find('#clear').removeClass('hidden');
+            }
+            
+            Hsis.Proxy.getAuthorsListForSelect(function (resAuthor) {            
+                var html = '<option value="0">' + Hsis.dictionary[Hsis.lang]["select"] + '</option>';
+                if (resAuthor) {
+                    $.each(resAuthor, function (i, v) {
+                        html += '<option parent="' + v.parentId + '" code="' + v.code + '" value="' + v.id + '">' + v.authorName[Hsis.lang] + '</option>';
+                    });
+                }
+
+                $('.res_author').html(html);
+                $('.res_author').select2();
+            
+                var ar = [];
+            $.each(data.authorList, function (i, v) {
+                ar.push(v.id);
+            });
+
+            $('body').find('#author-id').select2().val(ar).trigger('change');
+
+            });
+        
+            var editionList = data.editionList
+            var compilerList = data.compilerList
+            var edlist = '';
+            var complist = '';
+
+            $.each(editionList, function (i, v) {
+                edlist += '<div class="col-md-12 for-align res-edition-item">' +
+                        '<table class="table-block col-md-12">' +
+                        '<thead>' +
+                        '<th>' + Hsis.dictionary[Hsis.lang]['res_page'] + '</th>' +
+                        '<th>' + Hsis.dictionary[Hsis.lang]['res_publish_date'] + '</th>' +
+                        '<th>Qiyməti</th>' +
+                        '<th>Düzülüş şifrəsi</th>' +
+                        '</tr></thead>' +
+                        '<tbody>' +
+                        '<tr  data-res-price = "' + v.resPrice + '" data-res-row-serial = "' + v.resRowSerial +'" data-id="'+ v.id +'" data-res-page="' + v.pageCount + '" data-res-publish-date="' + v.publishDate + '">' +
+                        '<td data-res-page >' + v.pageCount + ' </td>' +
+                        '<td data-res-publish-date>' + v.publishDate + ' </td>' +
+                        '<td data-res-price>' + v.resPrice + ' </td>' +
+                        '<td data-res-row-serial >' + v.resRowSerial + ' </td>' +
+                        '</tr>' +
+                        '</tbody>' +
+                        '</table>' +
+                        '<div class="operations-button">' +
+                        '<div class="operations dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span' +
+                        ' class="glyphicon glyphicon-list"></span></div>' +
+                        '<ul class="dropdown-menu">' +
+                        '<li><a data-res-price = "' + v.resPrice + '" data-res-row-serial = "' + v.resRowSerial +'" data-res-page="' + v.pageCount + '" edit-res-edition  data-publish-date="' + v.publishDate + '" href="#" class="edit">' + Hsis.dictionary[Hsis.lang]['edit'] + '</a></li>' +
+                        '<li><a delete-contact href="#" class="erase" data-erase-type="edit-page">' + Hsis.dictionary[Hsis.lang]['erase'] + '</a></li>' +
+                        '</ul>' +
+                        '</div>' +
+                        '</div>';
+
+                $('#append_edit_res_param').html(edlist);
+                $('.resource-edition-modal').modal('hide');
+
+            })
+            $.each(compilerList, function (i, v) {            
+
+                                complist += '<div class="col-md-12 for-align res-compiler-item">' +
+                                            '<table class="table-block col-md-12">' +
+                                            '<thead>' +
+                                            '<th>Tərtibatçı</th>' +
+                                            '<th>S.A.A</th>' +
+                                            '</tr></thead>' +
+                                            '<tbody>' +
+                                            '<tr data-id="'+ v.id +'" data-res-compiler="' + v.compilerType.id + '" data-res-compiler-name="' + v.compilerName + '">' +
+                                            '<td data-res-compiler>' + v.compilerType.value[Hsis.lang] + ' </td>' +
+                                            '<td data-res-compiler-name>' + v.compilerName + ' </td>' +
+                                            '</tr>' +
+                                            '</tbody>' +
+                                            '</table>' +
+                                            '<div class="operations-button">' +
+                                            '<div class="operations dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span' +
+                                            ' class="glyphicon glyphicon-list"></span></div>' +
+                                            '<ul class="dropdown-menu">' +
+                                            '<li><a data-res-compiler="' + v.compilerType.id + '" edit-com-edition data-res-compiler-name="' + v.compilerName + '" href="#" class="edit">' + Hsis.dictionary[Hsis.lang]['edit'] + '</a></li>' +
+                                            '<li><a delete-contact href="#" class="erasec">' + Hsis.dictionary[Hsis.lang]['erase'] + '</a></li>' +
+                                            '</ul>' +
+                                            '</div>' +
+                                            '</div>';
+                            })
+                            
+                    $('#append_compile_param').append(complist);
+                        
+    });
+    
+    $('body').on('click', '.add-edition', function () {
+        $('.resource-edition-modal').modal();
+        $('.resource-edition-modal').find('input').val('');
+        $('.resource-edition-modal select').find('option:selected').prop('selected', false);
+        $('body').find('.confirm-res-param').attr('data-type', 'add');
+    });
+    
+    $('body').on('click', '.add-compiler', function () {
+        $('.resource-compiler-modal').modal();
+        $('.resource-compiler-modal').find('input').val('');
+        $('.resource-compiler-modal select').find('option:selected').prop('selected', false);
+        $('body').find('.confirm-compile-param').attr('data-type', 'add');
+    });
+        
+    $('body').on('click', '.edition-confirm', function () {
+        $('body').find('.edition-block').fadeOut();
+    });
+
+    $('body').on('click', '.edition-cancel', function () {
+        $('body').find('.edition-block').fadeOut();
+    });
+
+    $('body').on('click', '.close-add-resource', function () {
+        Hsis.Proxy.getResources();
+        $('.add-new').css('right', '-100%');
+        return false
+    });
+
+    $('[data-dismiss="modal"]').on('click', function (event) {
+        $('.modal').modal('hide');
+    });
+
+    $('#publish-date').datepicker();
+        
+ $("[resource-required-number]").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A, Command+A
+                        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                        // Allow: home, end, left, right, down, up
+                                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+    }); 
+</script>

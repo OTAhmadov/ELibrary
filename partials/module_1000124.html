@@ -1,0 +1,251 @@
+<div style="display: none; padding-right: 17px;" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" id="exportModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="modal-pdf col-md-4">
+                        <a class="export" data-value="pdf" href="#"><img class="a-export" src="assets/img/pdf-icon.png" width="150" height="150" alt="pdf"></a>
+                    </div>
+                    <div class="modal-excel col-md-4">
+                        <a class="export"  data-value="xls" href="#"><img class="a-export" src="assets/img/excel-icon.png" width="150" height="150" alt="xls"></a>
+                    </div>
+                    <div class="modal-html col-md-4">
+                        <a class="export" data-value="html" href="#"><img class="a-export" src="assets/img/html-icon.png" width="150" height="150" alt="html"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="content-header">
+    <div class="con-head-left">
+        <div id="authors-head">
+            <span placeholder="Authors" class="hed-title" id="author-head">Müəlliflər:</span><span>(<span id="muellifsayi"></span>)</span><span  class="head-total"> <span data-student-count></span></span>
+    </div>
+    <div id="alpha">
+        <a href="?oper=e_kitabxana&amp;alp=A" class="alfa">A</a> - <a href="?oper=e_kitabxana&amp;alp=B" class="alfa">B</a> - 
+        <a href="" class="alfa">C</a> - <a href="" class="alfa">Ç</a> - <a href="" class="alfa">D</a> - <a href="" class="alfa">E</a> - 
+        <a href="" class="alfa">Ə</a> - <a href="" class="alfa">F</a> - <a href="" class="alfa">G</a> - <a href="" class="alfa">H</a> - 
+        <a href="" class="alfa">X</a> - <a href="" class="alfa">İ</a> - <a href="" class="alfa">J</a> - <a href="" class="alfa">K</a> - 
+        <a href="" class="alfa">Q</a> - <a href="" class="alfa">L</a> - <a href="" class="alfa">M</a> - <a href="" class="alfa">N</a> - 
+        <a href="" class="alfa">O</a> - <a href="" class="alfa">Ö</a> - <a href="" class="alfa">P</a> - <a href="" class="alfa">R</a> - 
+        <a href="" class="alfa">S</a> - <a href="" class="alfa">Ş</a> - <a href="" class="alfa">T</a> - <a href="" class="alfa">U</a> - 
+        <a href="" class="alfa">Ü</a> - <a href="" class="alfa">V</a> - <a href="" class="alfa">Y</a> - <a href="" class="alfa">Z</a>
+    </div>
+    </div>
+    <div class="con-head-right">
+        <div class="prepend-icon">
+            <form class="author-form">
+                <input data-i18n="placeholder.search" id="aut_search" type="search" placeholder="Search" name="keyword">
+                <input id="alphakey" name="alphabet" hidden>
+             </form>
+        </div>
+       
+        <div id="buttons_div" class="dropdown-func">
+            <div class="btn btn-default reg dropdown-toggle cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                Ümumi əməliyyatlar
+            </div>
+            <ul id="module_operations" class="dropdown-menu calibrated">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--<div class="row">
+    <div class="col-sm-12 data">
+        <div  class="autohrs-list">  
+
+        </div>
+                    <div class="space-for-footer">
+                <div id="load_more_div" class="flex-input">
+                    <button data-i18n="load.more" data-table="autcatalogue" class="btn loading-margins btn-load-more" placeholder="Daha çox">Daha çox</button>
+                </div>
+            </div>
+    </div>-->
+
+
+    <div class="row">
+        <div class="data col-sm-12 auttablediv ">
+
+            <!--<div class="main-div">-->
+            <div class="panel panel-white table-scroll" >
+
+            
+<div class="table-responsive">
+    
+                <table class="table table-celled" id="muelliflist">
+                    <thead>
+                        <tr>
+                            <th>Nö</th>
+                            <th>Adı</th>
+                            <th>Əsərləri</th>
+                            <th>Ölkə</th>
+                            <th>Yaşadığı illər</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+</div>
+                <div class="space-for-footer">
+                    <div id="load_more_div" class="flex-input">
+                        <button data-i18n="load.more" data-table="autcatalogue" class="btn loading-margins btn-load-more" placeholder="Daha çox">Daha çox</button>
+                    </div>
+                </div>
+            
+            <!--</div>-->
+        </div>
+            </div>
+        <div class="col-sm-4 aut-info">
+    <div class="panel info panel-white">
+        <div class="panel-heading">
+            <h3 data-i18n="" class="panel-title" placeholder="Məlumat">ƏSƏRLƏRİ</h3>
+            <div class="panel-close"><img src="assets/img/upd/close.svg" alt=""></div>
+            <div class="type_2_btns"><div title="Əməliyyatlar" class="operations operations-top dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/img/upd/table-dots.svg"></div><ul class="dropdown-menu"><li><a id="operation_1000042" data-status="undefined" href="#">Təsdiq et</a></li><li><a id="operation_1000076" data-status="undefined" href="#">Şəxsi məlumatların redaktəsi</a></li><li><a id="operation_1000058" data-status="undefined" href="#">Əməkdaşa baxış</a></li><li><a id="operation_1000032" data-status="undefined" href="#">Əməkdaşın redaktəsi</a></li><li><a id="operation_1000033" data-status="undefined" href="#">Əməkdaşın silinməsi</a></li></ul></div>
+        </div>
+        <div class="panel-body">
+            <div class="aaas">
+                <div class="col-xs-12 info-item student-name">
+                    <div><span class="eserleri"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+<div class="add-new">
+    <div class="search-scroll"></div>
+</div>
+<script src="assets/js/modal_drag.js"></script>
+<script src="assets/js/jquery-ui.js"></script>
+<script>
+    $(function () {
+    
+    $('body').find('.aaas').slimScroll();    
+    $('body').on('click, .muellifshekli', function(){
+    $('.muellifshekli').attr('src', Hsis.urls.ELIBRARY + 'authors/'+ id +'/image?token=' + Hsis.token);
+//    $(#overlay").show();
+//    $("#overlayContent").show();
+});    
+        
+    $('body').on('change', '#res_bib_description', function () {
+        var params = $('.author-form').serialize();
+        Hsis.Proxy.getResources('', params);
+
+    });
+    
+    $('body').on('change', '#res_content', function () {
+//        var value = $(this).val();
+//        $('form input[name="content"]').val(value);
+        var params = $('.author-form').serialize();
+        Hsis.Proxy.getResources('', params);
+
+    });
+    
+        Hsis.i18n(Hsis.lang);
+        $('body').find('.table-scroll').slimScroll();
+        Hsis.Proxy.getAuthorsList();
+
+        $('.search-scroll').slimScroll();
+        $('body').on('click', '.new-close', function () {
+            $('body').find('.new-upd').css('right', '-100%');
+        });
+
+        Hsis.Proxy.loadOperations(Hsis.currModule, function (operations) {
+            $('#buttons_div').find('ul').html(Hsis.Service.parseOperations(operations, 1));
+
+        });
+
+        $('#main-div .sub_modules_div').remove();
+        $('.module-list').find('.sub-module-con').remove();
+
+        Hsis.Proxy.loadDictionariesByTypeId(1000016, 0, function (eduLevels) {
+            if (eduLevels) {
+                var html = '';
+                $.each(eduLevels, function (i, v) {
+                    html += '<option value="' + v.id + '">' + v.value[Hsis.lang] + '</option>';
+                });
+                $('#edu_levels').html(html);
+
+            }
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId('1000002', 1000700, function (eduLevel) {
+            if (eduLevel) {
+                var html = '<option value="0">Hamısı</option>';
+                $.each(eduLevel, function (i, v) {
+                    html += '<option parent="' + v.parentId + '" code="' + v.code + '" value="' + v.id + '">' + v.value[Hsis.lang] + '</option>';
+                });
+                $('#main-div #org_spec_level_filter').html(html);
+            }
+        });
+
+        $('.modal-content').draggable();
+        
+//                    $('.main-content-upd').on('keypress', '#res_search', function (e) {
+//                try {
+//
+//                    if (e.keyCode == 13) {
+//                        var keyword = $('#res_search').val();
+//
+//                        if (keyword.trim().length > 2) {
+//                            $('.btn-load-more').removeAttr('data-page');
+//                            $('.resource-form input[name="keyword"]').val(keyword);
+//                            var queryparams = $('.main-content-upd .resource-form').serialize();
+//                            Hsis.Proxy.getResources('', queryparams);
+//                        } else if (keyword.trim().length == 0) {
+//
+//
+//                            $('.btn-load-more').removeAttr('data-page');
+//                            $('.resource-form input[name="keyword"]').val('');
+//                            var queryparams = $('.main-content-upd .resource-form').serialize();
+//                            Hsis.Proxy.getResources('', queryparams);
+//                        }
+//                    }
+//
+//                } catch (err) {
+//                    console.error(err);
+//                }
+//            });
+     $('body').on('keypress', '#aut_search', function (e) {
+       try {
+
+           if (e.keyCode == 13) {
+               var keyword = $('#aut_search').val();
+               
+               if (keyword.trim().length > 2) {
+//                   $('.btn-load-more').removeAttr('data-page');
+//                   $('.author-form input[name="keyword"]').val(keyword);
+//                   var queryparams = $('.main-content-upd .author-form').serialize();
+                   var queryparams = $('.author-form').serialize();
+//                   console.log(queryparams)
+                   Hsis.Proxy.getAuthorsList('', queryparams);
+               }
+               else if (keyword.trim().length == 0) {
+                   
+                   
+                  $('.btn-load-more').removeAttr('data-page');
+//                  $('.author-form input[name="keyword"]').val('');
+//                   var queryparams = $('.main-content-upd .author-form').serialize();
+                   Hsis.Proxy.getAuthorsList('', queryparams);
+               }
+                          return false;
+
+           }
+
+       }
+       catch (err) {
+           console.error(err);
+       }
+   });
+   
+ });
+
+</script>
+

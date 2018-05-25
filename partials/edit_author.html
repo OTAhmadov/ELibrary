@@ -1,0 +1,145 @@
+<h1>Redaktə</h1>
+<div class="basic-info edit-aut-page">
+    <div class="search-butons" style="margin: 0; float: none">
+        <button data-i18n="ok" type="submit" class="btn btn-primary" id="confirmAddAuthor" >OK</button>
+        <button data-i18n="close" type="submit" class="btn btn-primary btn-block close-add-resource">Bağla</button>
+    </div>
+
+</div>
+<div class="row">
+    <form class="research-form">
+        <div class="form-group">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label  for ="group-name" > Adı</label>
+                        <div class="prepend-icon">
+                            <input  type="text" class="form-control" id="author-name" resource-required="" placeholder="Adı" name = "authorName">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group">
+                        <label  for="exampleInputEmail1" >Yaşadığı illər</label>
+                        <input  type="text" class="author_life" id="author-life" placeholder="" name="birthDeath" maxlength="23">
+                         <!--resource-required=""-->
+                        </select>
+                    </div>
+                </div>
+                
+            <div class="form-group col-md-6">
+                <div class="form-group">
+                    <label>Doğum Yeri</label>
+                    <div class="prepend-icon">
+                        <select class="form-control" id="author-publish-place" placeholder="" name="birthPlace"></select>
+                        <!--resource-edition-required=""-->  
+                        <i class="fa fa-list-alt"></i>
+                    </div>
+                </div>
+            </div>
+                
+<!--                 <div class="form-group col-md-12">
+                    <div class="form-group">
+                        <label>Haqqında</label>
+                        <textarea class="form-control" id="about-author" name="about" maxlength="1000"></textarea>    
+                    </div>
+                </div>-->
+ 
+                <div class="col-md-12">
+                    <div id="append_res_param" class="panel-body" style="padding: 0">
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="col-md-12">
+            <div class="panel-heading">
+                <label id="labIdAut">
+                    <img id="shekilauthor" src="assets/img/upload-img.png" width="20" height="20">
+                    <input type="file" class="new-add-doc-file-aut hidden" accept="image/*">
+                    <button id="clearauthor" class="hidden">Sil</button>
+                </label>
+                <div class="spaninklasiaut">
+                    <span id="autfile" class="hidden"></span>
+                    <span class="file-name"></span>
+                </div>
+            </div>    
+        </div>       -->
+    </form>
+</div>
+
+<script>
+
+    $(function () {
+        
+        var authorId = $('body').attr('data-id');
+            Hsis.Proxy.getAuthorDetails(authorId, function (data) {
+                 $('body').find('#author-name').val(data.authorName[Hsis.lang]);
+                 $('body').find('#author-publish-place').find('option[value="'+data.birthPlace.id+'"]').prop('selected',true);
+                 $('body').find('#author-life').val(data.birthDeath);
+                 $('body').find('#about-author').val(data.about);
+                 $('body').find('#shekilauthor').attr('data-image-id', (data.fileWrapper && data.fileWrapper.id ? data.fileWrapper.id : 0));
+
+                 if(data.fileWrapper) {
+                    $('body').find('#autfile').removeClass('hidden');
+                    $('body').find('#clearauthor').removeClass('hidden');
+                    $('body').find('#autfile').html(data.fileWrapper.originalName);
+                    $('body').find('#autfile').attr({
+                        'data-path': data.fileWrapper.path
+                    });
+                }
+            });
+                
+        Hsis.i18n();
+        $('.datepicker').datepicker();
+        $('body').find('#author-life').mask('00.00.0000 - 00.00.0000');
+        
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.COUNTRY, 0, function (resCountry) {
+            var html = Hsis.Service.parseDictionaryForSelect(resCountry);
+
+            $('#author-publish-place').html(html);
+
+        });
+
+        $('body').on('click', '.close-add-resource', function () {
+
+            $('.add-new').css('right', '-100%');
+            return false
+        });
+
+        $('[data-dismiss="modal"]').on('click', function (event) {
+            $('.modal').modal('hide');
+        });
+
+        $('#publish-date').datepicker();
+
+//        $('#main-div').on('change', '.new-add-doc-file', function (e) {
+//            try {
+//                var fileName = this.files[0].name;
+//                $('body').find('#autfile').text(fileName);
+//                $('body #clearauthor').removeClass('hidden');
+//                $('body #autorunsheklinsil').addClass('hidden');
+//            } catch (err) {
+//                console.error(err);
+//            }
+//        });
+                
+        $("[resource-required-number]").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                 // Allow: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+                 // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                     // let it happen, don't do anything
+                     return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });        
+        
+    });
+
+</script>

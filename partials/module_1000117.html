@@ -1,0 +1,205 @@
+<div style="display: none; padding-right: 17px;" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" id="exportModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="modal-pdf col-md-4">
+                        <a class="export" data-value="pdf" href="#"><img class="a-export" src="assets/img/pdf-icon.png" width="150" height="150" alt="pdf"></a>
+                    </div>
+                    <div class="modal-excel col-md-4">
+                        <a class="export"  data-value="xls" href="#"><img class="a-export" src="assets/img/excel-icon.png" width="150" height="150" alt="xls"></a>
+                    </div>
+                    <div class="modal-html col-md-4">
+                        <a class="export" data-value="html" href="#"><img class="a-export" src="assets/img/html-icon.png" width="150" height="150" alt="html"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<form class="sabah-form">
+    <input name="educationPaymentTypeId" class="hidden" />
+    <input name="searchAttr" class="hidden" />
+</form>
+
+<div class="content-header">
+    <div class="con-head-left">
+        <span placeholder="Resources" class="hed-title" id="elmibash">Elmi araşdırmalar</span><span>(<span id="arashdirmasayi"></span>)</span><span class="head-total"> <span data-student-count></span></span>
+    </div>
+    <div class="con-head-right">
+        <div class="prepend-icon">
+            <input data-i18n="placeholder.search" id="research_search" type="search" placeholder="Search">
+
+        </div>
+                <button type="button" class="btn btn-default filter-rese">Filter</button>
+
+        <div id="buttons_div" class="dropdown-func">
+            <div class="btn btn-default reg dropdown-toggle cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                Ümumi əməliyyatlar
+            </div>
+            <ul id="module_operations" class="dropdown-menu calibrated">
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="module_1000017">
+<div class="filters-block">
+
+    <form class="scientific-form">
+        <input class="hidden" name = "keyword"/>
+
+        <div class="btn-group">
+            <select class="form-control sci-subject"  id="sci_subject" name="sciSubject">
+            </select>
+        </div>
+
+        <div class="btn-group">
+            <select class="form-control" id="sci_language" name="sciLang">
+            </select>   
+        </div>
+
+        <div class="btn-group">
+            <select class="form-control" id="sci_publish_country" name="sciPublishPlace">
+            </select>   
+        </div>
+    </form>
+</div>
+</div>
+
+<div class="col-sm-4 info rese-info">
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <h3 data-i18n="info" class="panel-title" placeholder="Məlumat">Məlumat</h3>
+            <div class="panel-close"><img src="assets/img/upd/close.svg" alt=""></div>
+            <div class="type_2_btns"><div title="Əməliyyatlar" class="operations operations-top dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/img/upd/table-dots.svg"></div><ul class="dropdown-menu"><li><a id="operation_1000042" data-status="undefined" href="#">Təsdiq et</a></li><li><a id="operation_1000076" data-status="undefined" href="#">Şəxsi məlumatların redaktəsi</a></li><li><a id="operation_1000058" data-status="undefined" href="#">Əməkdaşa baxış</a></li><li><a id="operation_1000032" data-status="undefined" href="#">Əməkdaşın redaktəsi</a></li><li><a id="operation_1000033" data-status="undefined" href="#">Əməkdaşın silinməsi</a></li></ul></div>
+        </div>
+        <div class="panel-body">
+            <div class="col-xs-12 info-item student-name">
+                <div><span class="keyspan">Ölkə:</span><span class="placespan"></span></div>
+                <div><span class="keyspan">Tarix:</span><span class="datespan"></span></div>
+                <div><span class="keyspan">Dil:</span><span class="langspan"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="tab-pane fade in active data col-sm-12 resetablediv">
+        <div class="main-div">
+            <table class="table table-celled table-block table-scroll long-scroll" id="resetable">
+                <thead>
+                    <tr>
+                        <th>Nö</th>
+                        <th>Adı</th>
+                        <th>Müəllif</th>
+                        <th>Fənn</th>
+<!--                        <th>Sayı</th>
+                        <th>ISBN</th>-->
+                        <!--<th>Tarix</th>-->
+                        <th>Qeydlər</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="space-for-footer">
+                <div id="load_more_div" class="flex-input">
+                    <button data-i18n="load.more" data-table="scicatalogue" class="btn loading-margins btn-load-more" placeholder="Daha çox">Daha çox</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="add-new">
+    <div class="search-scroll"></div>
+</div>
+
+<script>
+    $(function () {
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.COUNTRY, 0, function (resCountry) {
+            var html = Hsis.Service.parseDictionaryForSelect(resCountry);
+            $('#sci_publish_country').html(html);
+            $('#sci_publish_country option:first-child').text('Nəşr yeri');
+
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.RESLANG, 0, function (resLanguage) {
+            var html = Hsis.Service.parseDictionaryForSelect(resLanguage);
+            $('#sci_language').html(html);
+            $('#sci_language option:first-child').text('Dil');
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.SCISUBJECT, 0, function (resSubject) {
+            var html = Hsis.Service.parseDictionaryForSelect(resSubject);
+            $('#sci_subject').html(html);
+            $('#sci_subject option:first-child').text('Fənn');
+
+        });
+
+        Hsis.Proxy.loadOperations(Hsis.currModule, function (operations) {
+            $('#buttons_div').find('ul').html(Hsis.Service.parseOperations(operations, 1));
+
+        });
+
+        Hsis.i18n(Hsis.lang);
+        //$('body').find('.research-list').slimScroll();
+        Hsis.Proxy.getResearch();
+
+        $('#main-div .sub_modules_div').remove();
+        $('.module-list').find('.sub-module-con').remove();
+
+        $('body').on('click', '#operation_1001340', function () {
+            var sciData = $(this);
+            var sciParent = sciData.parents('div.rese-info');
+            var id = sciParent.attr('data-id');
+            $.confirm({
+                title: Hsis.dictionary[Hsis.lang]['warning'],
+                content: Hsis.dictionary[Hsis.lang]['delete_info'],
+                confirm: function () {
+                    Hsis.Proxy.removeResearch(id, function () {
+//                    var params = $('.research-form').serialize();
+                        Hsis.Proxy.getResearch();
+                        $('body').find('.col-sm-4.rese-info').fadeOut();
+        $('body').find('.col-sm-8.data').removeClass('col-sm-8').addClass('col-sm-12'); 
+                    });
+                },
+                theme: 'black'
+            });
+            
+        });
+        
+        $('.main-content-upd').on('keypress', '#research_search', function (e) {
+            try {
+
+                if (e.keyCode == 13) {
+                    var keyword = $('#research_search').val();
+
+                    if (keyword.trim().length > 2) {
+                        $('.btn-load-more').removeAttr('data-page');
+                        $('.scientific-form input[name="keyword"]').val(keyword);
+                        var queryparams = $('.main-content-upd .scientific-form').serialize();
+                        Hsis.Proxy.getResearch('', queryparams);
+                    } else if (keyword.trim().length == 0) {
+
+
+                        $('.btn-load-more').removeAttr('data-page');
+                        $('.scientific-form input[name="keyword"]').val('');
+                        var queryparams = $('.main-content-upd .scientific-form').serialize();
+                        Hsis.Proxy.getResearch('', queryparams);
+                    }
+                }
+
+            } catch (err) {
+                console.error(err);
+            }
+        });
+
+    })
+</script>

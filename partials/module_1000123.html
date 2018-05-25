@@ -1,0 +1,287 @@
+<div style="display: none; padding-right: 17px;" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" id="exportModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="modal-pdf col-md-4">
+                        <a class="export" data-value="pdf" href="#"><img class="a-export" src="assets/img/pdf-icon.png" width="150" height="150" alt="pdf"></a>
+                    </div>
+                    <div class="modal-excel col-md-4">
+                        <a class="export"  data-value="xls" href="#"><img class="a-export" src="assets/img/excel-icon.png" width="150" height="150" alt="xls"></a>
+                    </div>
+                    <div class="modal-html col-md-4">
+                        <a class="export" data-value="html" href="#"><img class="a-export" src="assets/img/html-icon.png" width="150" height="150" alt="html"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<form class="sabah-form">
+    <input name="educationPaymentTypeId" class="hidden" />
+    <input name="searchAttr" class="hidden" />
+</form>
+
+<div class="content-header">
+    <div class="con-head-left">
+        <span placeholder="Resources" class="hed-title">Soraqçalar</span><span  class="head-total"> <span data-student-count></span></span>
+    </div>
+    <div class="con-head-right">
+        <div class="prepend-icon">
+            <input data-i18n="placeholder.search" id="dic_search" type="search" placeholder="Search">
+
+        </div>
+
+        <div id="buttons_div" class="dropdown-func">
+            <div class="btn btn-default reg dropdown-toggle cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                Ümumi əməliyyatlar
+            </div>
+            <ul id="module_operations" class="dropdown-menu calibrated">
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="row ">
+        <div class="col-md-4 middle-area-top  p-r-0">
+            <div class="panel panel-white " style="min-height: 300px">
+                <div class="panel-heading">
+                                <h3 data-i18n="dictionary.type.name" class="panel-title" placeholder="Soraqça növü">Soraqça növü</h3>
+                            </div>
+                <div class="panel-body table-scroll">
+                    <table id="dic-type-table" class="table table-celled table-hover">
+                        <thead>
+                            <tr>
+                                <th data-i18n="dictionary.type.code" placeholder="Kod">Kod</th>
+                                <th data-i18n="dictionary.type.name" placeholder="Soraqça tipi">Soraqça tipi</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <div class="space-for-footer">
+                        <div class=" flex-input">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 middle-area-top">
+            <div class="panel panel-white ">
+                <div class="panel-heading">
+                    <h3 data-i18n="dictionary.name" class="panel-title" placeholder="Soraqça">Soraqça</h3>
+                </div>
+                <div class="panel-body table-scroll">
+                    <table id="dictionary-table" class="table table-celled table-hover long-last-td">
+                        <thead>
+                            <tr>
+                                <th>№</th>
+
+                                <th class="hidden" data-i18n="dictionary.table.id">Parent ID</th>
+                                <th data-i18n="dictionary.name" placeholder="Soraqça">Soraqça</th>
+                                <!--<th>Kod</th>-->
+                                <th data-i18n="update_date" placeholder="Dəyişilmə tarixi">Dəyişilmə tarixi</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+                    </table>
+<!--                    <div class="space-for-footer">
+                        <div id="load_more_div" class=" flex-input">
+                            <button data-i18n="load.more" data-table="dictionary" class="btn loading-margins btn-load-more">Daha çox yüklə</button>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="add-new">
+    <div class="search-scroll"></div>
+</div>
+
+<script>
+    $(function() {              
+    Hsis.Proxy.getDictionariesTypeListByType(1000012, function(){} );
+//    $('body').on('click', '#dic-type-table tr', function(){
+//        var id = $(this).attr('data-id')
+//        var parentId = $(this).attr('data-parent-id');
+//        Hsis.tempDataId = id;
+//
+//        Hsis.Proxy.loadDictionariesByTypeId(id, 0, function(data){
+//            var html = '';
+//            $.each(data, function (i, v) {
+//                html += '<tr data-id="' + v.id + '">' +
+//                        '<td>' + (i + 1) + '</td>' +
+//                        '<td class="hidden">' + (v.parentId != 0 ? v.parentId : 'No parent') + '</td>' +
+//                        '<td>' + v.value[Hsis.lang] + '</td>' +
+//                        '<td>' + v.updateDate + '</td>' +
+//                        '<td>' + Hsis.Service.parseOperations(Hsis.operationList, '2') + '</td>' +
+//                        '</tr>';
+//            });
+//            $('#dictionary-table tbody').html(html);
+//        });
+//    })
+   
+             $('#dic-type-table').on('click', 'tr', function () {
+
+            Hsis.dicTypeId = $(this).attr('data-id');
+            
+            Hsis.Proxy.loadOperations(Hsis.currModule, function (operations) {
+                $('#buttons_div').find('ul').html(Hsis.Service.parseOperations(operations, 1));
+
+                Hsis.Proxy.loadDictionariesByTypeId(Hsis.dicTypeId,0, function (result) {
+                    Hsis.Service.parseDictype(result);
+                });
+
+            });
+        });
+        
+        Hsis.Proxy.loadOperations(Hsis.currModule, function (operations) {
+        $('#buttons_div').find('ul').html(Hsis.Service.parseOperations(operations, 1));
+
+        });
+        
+        Hsis.i18n(Hsis.lang);
+        $('body').find('.table-scroll').slimScroll();
+        
+       $('#main-div .sub_modules_div').remove();
+//        Hsis.Proxy.loadDictionariTypes(function () {
+//            
+//            Hsis.dicTypeId = $('#dic-type-table').find('tr').eq(1).attr('data-id');
+//            Hsis.Proxy.loadOperations(Hsis.currModule, function (operations) {
+//                $('#buttons_div').find('ul').html(Hsis.Service.parseOperations(operations, 1));
+//
+//                Hsis.Proxy.loadDictionariesByTypeId(Hsis.dicTypeId,0, function (result) {
+//                    Hsis.Service.parseDictype(result);
+//                });
+//
+//            });
+//        });
+        
+        $('.content-body').find('[data-i18n]').each(function() {
+           var attr = $(this).attr('data-i18n');
+            $(this).text(Hsis.dictionary[Hsis.lang][attr]);
+            $(this).attr('placeholder',Hsis.dictionary[Hsis.lang][attr]);
+        });
+        
+        $('#code').on('focusout', function () {
+            var code = $(this).val();
+            Hsis.Proxy.checkDictionaryCode(code, function (data) {
+                if(data.data == "") {
+                    $('.span-code').removeClass('fa fa-close span-code-warning').addClass('fa fa-check span-code-success')
+                    $('#code').removeClass('error-border').addClass('success-border')
+                }
+                else {
+                    $('.span-code').removeClass('fa fa-check span-code-success').addClass('fa fa-close span-code-warning')
+                    $('#code').removeClass('success-border').addClass('error-border')
+                }
+            });
+            
+        });
+
+        // Draggable modal initiation
+        $('.modal-content').draggable();
+        
+        $('#main-div').on('click', '.parent-show', function() {
+        
+            $('#main-div .parent-div').stop().slideToggle();
+            
+        })
+        
+            //----------------------------------------------------------------------------------------------------Search--------------------------------------------------------------------------------------------------//
+
+            $('.main-content-upd').on('keypress', '#dic_search', function (e) {
+                try {
+
+                    if (e.keyCode == 13) {
+                        var keyword = $('#dic_search').val();
+
+                        if (keyword.trim().length > 2) {
+                            
+                            Hsis.Proxy.getDictionariesTypeListByType(queryparams);
+                        } else if (keyword.trim().length == 0) {
+
+                            $('.btn-load-more').removeAttr('data-page');
+                            $('.resource-form input[name="keyword"]').val('');
+                            var queryparams = $('.main-content-upd .resource-form').serialize();
+                            Hsis.Proxy.getDictionariesTypeListByType(queryparams);
+                        }
+                    }
+
+                } catch (err) {
+                    console.error(err);
+                }
+            });
+            
+    })
+</script>
+
+<div style="display: none; padding-right: 17px;" class="modal fade main-modal" role="dialog" aria-labelledby="gridSystemModalLabel" id="dictionary-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header header-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 data-i18n="dictionary.name" class="modal-title" id="gridSystemModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-white">
+                    <div class="panel-heading parent-show">
+                        <span data-i18n="parents" href="#"><h3 class="panel-title">Soraqçalar</h3></span>
+                    </div>
+                    <div class="panel-body parent-div">
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <label data-i18n="dictionary.type.name" class="control-label" for="typeName">Dictionary Type</label>
+                                <select class="form-control dic-type-select">
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label data-i18n="dictionary.name" class="control-label" for="parentName">Dictionaries</label>
+                                <select class="form-control parent-select">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label data-i18n="dictionary.type.code" class="control-label" for="code">Code</label>
+                            <span class="span-code"></span>
+                            <input class="form-control" id="code"  type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n = "dictionary.value" class="control-label" for="az">Az</label>
+                            <input class="form-control input-dictionary-name" name="az" type="text" required>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button data-i18n="buttons.ok" type="button" class="btn btn-primary btn-dictionary">Təsdiqlə</button>
+                <button data-i18n="buttons.close" type="button" class="btn btn-danger" data-dismiss="modal">Bağla</button>
+                
+            </div>
+        </div> 
+    </div>
+</div>
+
+<div class="col-xs-12 content-filters top-panel">
+    <div class="col-xs-6 select-bar">
+        <div class="form-group">
+           
+        </div>
+    </div>
+    

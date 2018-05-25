@@ -1,0 +1,326 @@
+<div style="display: none; padding-right: 17px;" class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" id="exportModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="modal-pdf col-md-4">
+                        <a class="export" data-value="pdf" href="#"><img class="a-export" src="assets/img/pdf-icon.png" width="150" height="150" alt="pdf"></a>
+                    </div>
+                    <div class="modal-excel col-md-4">
+                        <a class="export"  data-value="xls" href="#"><img class="a-export" src="assets/img/excel-icon.png" width="150" height="150" alt="xls"></a>
+                    </div>
+                    <div class="modal-html col-md-4">
+                        <a class="export" data-value="html" href="#"><img class="a-export" src="assets/img/html-icon.png" width="150" height="150" alt="html"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--<form class="sabah-form">
+    <input name="educationPaymentTypeId" class="hidden" />
+    <input name="searchAttr" class="hidden" />
+</form>-->
+
+<div class="content-header">
+    <div class="con-head-left">
+        <span placeholder="Müraciətlər" class="hed-title" id="muraciets">Müraciətlər</span><span>(<span id="muracietsayi"></span>)</span><span  class="head-total"> <span data-student-count></span></span>
+    </div>
+    <div class="con-head-right">
+        <div class="prepend-icon">
+                <form class="req-search-form">
+                    <input data-i18n="placeholder.search" id="request_search" type="search" placeholder="Search" name="keyword">
+                </form>
+        </div>
+        <button type="button" class="btn btn-default filter">Filter</button>
+        <div id="buttons_div" class="dropdown-func">
+            <div class="btn btn-default reg dropdown-toggle cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                Ümumi əməliyyatlar
+            </div>
+            <ul id="module_operations" class="dropdown-menu calibrated">
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="module_s">
+    <div class="filters-block ">
+
+    <form class="request-filt-form">
+        <div class="btn-group">
+            <select class="form-control" id="uni" name="orgId">
+            </select>
+        </div>
+        <div class="btn-group">
+            <select class="form-control" id="status" name="status">
+            </select>
+        </div>
+        <div class="btn-group">
+             <input type="text" maxlength="10" class="form-control datepicker" data-date-format="dd/mm/yyyy" id="start_dated"  placeholder="Verilmə tarixi" name="startDate">
+                </div>
+        <div class="btn-group">
+            <input type="text" maxlength="10" class="form-control datepicker" data-date-format="dd/mm/yyyy" id="last_dated"  placeholder="Qaytarılma tarixi" name="lastDate">
+                </div>
+         <!--<button data class="btn btn-default search-reqlist">Axtar</button>-->
+    </form>
+<!--                <div class="btn-group">
+             <input type="text" maxlength="10" class="form-control datepicker" data-date-format="dd/mm/yyyy" id="start_dated"  placeholder="Verilmə tarixi" name="startDate">
+                </div>
+        <div class="btn-group">
+            <input type="text" maxlength="10" class="form-control datepicker" data-date-format="dd/mm/yyyy" id="last_dated"  placeholder="Qaytarılma tarixi" name="lastDate">
+                </div>
+         <button data class="btn btn-primary search-reqlist">Axtar</button>-->
+         
+</div>
+</div>
+
+
+
+<div class="row">
+
+    <div class="tab-pane fade in active data col-sm-12 requestlist">
+
+        <div class="main-div">
+            <table class="table table-celled table-block table-scroll long-scroll" id="requestlist">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Oxucu (S.A.A)</th>
+                        <th>İstifadəçi qrupu</th>
+                        <th>Struktur bölməsi</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+                        <div class="space-for-footer">
+                <div id="load_more_div" class="flex-input">
+                    <button data-i18n="load.more" data-table="reqcatalogue" class="btn loading-margins btn-load-more" placeholder="Daha çox">Daha çox</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="col-sm-4 info">
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <h3 data-i18n="info" class="panel-title" placeholder="Məlumat">Məlumat</h3>
+            <div class="panel-close"><img src="assets/img/upd/close.svg" alt=""></div>
+            <div class="type_2_btns"><div title="Əməliyyatlar" class="operations operations-top dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/img/upd/table-dots.svg"></div><ul class="dropdown-menu"><li><a id="operation_1000042" data-status="undefined" href="#">Təsdiq et</a></li><li><a id="operation_1000076" data-status="undefined" href="#">Şəxsi məlumatların redaktəsi</a></li><li><a id="operation_1000058" data-status="undefined" href="#">Əməkdaşa baxış</a></li><li><a id="operation_1000032" data-status="undefined" href="#">Əməkdaşın redaktəsi</a></li><li><a id="operation_1000033" data-status="undefined" href="#">Əməkdaşın silinməsi</a></li></ul></div>
+        </div>
+        <div class="panel-body">
+            <div class="col-xs-12 definition-list">
+
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="add-new">
+        <div class="search-scroll"></div>
+    </div>
+
+    <div class="new-upd">
+        <div class="search-scroll">
+            <div class="text-right">
+                <button data-i18n="close" type="submit" class="btn btn-primary btn-block new-close ">CLose</button>
+            </div>
+            <h2 data-i18n="search_reader" class="panel-title">Search reader</h2>
+            <form class="search-form">
+                <div class="pincode-div-first">
+                    <label data-i18n="searchtype">İstifadəçi adı yaxud pinkod</label>
+                    <input name="pinAndUserName" class="search-pincode" type="text" placeholder="#########"/>
+                </div>
+            </form>
+            <div class="pincode-div-second">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-lg-6">
+                        <button data-i18n="next" type="submit" class="btn btn-primary btn-block abroad-pincode-button-next" placeholder="İrəli" data-step="1" data-operation-type="new">İrəli</button>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-lg-6 iamas-search hidden">
+                        <div class="form-group">
+                            <div class="radio">
+                                <label>
+                                    <input name="form-field-radio2" class="check-iamas-input" checked="checked" type="checkbox">
+                                    <span data-i18n="iamas" class="text">IAMAS </span>
+                                </label>
+                            </div>
+                            <div class="radio" >
+                                <label>
+                                    <input name="form-field-radio2"  type="checkbox" disabled="disabled">
+                                    <span data-i18n="myi" class="text">Müvəqqəti Yaşayış İcazəsi - Seriya</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- --------------------------------------------------edition------------------------------------------------------------->
+<!--    <div class="modal filter-for-lastdate" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+
+                <div class="modal-body">
+                    <form class="request-filt-form2">    
+
+                    <div class="form-group">
+                        <label placeholder="Verilmə tarixi">Verilmə tarixi:</label>
+                        <div class="prepend-icon">
+                            <input type="text" maxlength="10" class="form-control datepicker" data-date-format="dd/mm/yyyy" id="start_date"  placeholder="Verilmə tarixi" name="startDate">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label placeholder="Bitiş tarix">Bitiş tarix</label>
+                        <div class="prepend-icon">
+                            <input type="text" maxlength="10" class="form-control datepicker" data-date-format="dd/mm/yyyy" id="last_date"  placeholder="Qaytarılma tarixi" name="finishDate">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer flex-img">
+                    <button data class="btn btn-primary search-reqlist">Axtar</button>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    
+<script src="assets/js/modal_drag.js"></script>
+<script src="assets/js/jquery-ui.js"></script>
+<script>
+    $(function () {
+        
+        $('body').find('.table-scroll').slimScroll();
+        Hsis.Proxy.getRequest();
+        
+        $('#muraciets').on('click', function() {
+            $('body').find('.col-sm-4.info').fadeOut();
+            $('body').find('.col-sm-8.data').removeClass('col-sm-8').addClass('col-sm-12'); 
+            Hsis.Proxy.getRequest();
+        });
+        
+        $('.datepicker').datepicker();
+        
+//        $('body').on('change', '#res_bib_description', function () {
+//            var params = $('.author-form').serialize();
+//            Hsis.Proxy.getRequest('', params);
+//
+//        });
+//
+//        $('body').on('change', '#res_content', function () {
+//            var params = $('.author-form').serialize();
+//            Hsis.Proxy.getResources('', params);
+//
+//        });
+
+        Hsis.i18n(Hsis.lang);
+       
+        $('.search-scroll').slimScroll();
+        $('body').on('click', '.new-close', function () {
+            $('body').find('.new-upd').css('right', '-100%');
+        });
+
+        Hsis.Proxy.loadOperations(Hsis.currModule, function (operations) {
+            $('#buttons_div').find('ul').html(Hsis.Service.parseOperations(operations, 1));
+
+        });
+
+        $('#main-div .sub_modules_div').remove();
+        $('.module-list').find('.sub-module-con').remove();
+
+        Hsis.Proxy.loadDictionariesByTypeId(1000016, 0, function (eduLevels) {
+            if (eduLevels) {
+                var html = '';
+                $.each(eduLevels, function (i, v) {
+                    html += '<option value="' + v.id + '">' + v.value[Hsis.lang] + '</option>';
+                });
+                $('#edu_levels').html(html);
+
+            }
+        });
+
+        Hsis.Proxy.loadDictionariesByTypeId('1000002', 1000700, function (eduLevel) {
+            if (eduLevel) {
+                var html = '<option value="0">Hamısı</option>';
+                $.each(eduLevel, function (i, v) {
+                    html += '<option parent="' + v.parentId + '" code="' + v.code + '" value="' + v.id + '">' + v.value[Hsis.lang] + '</option>';
+                });
+                $('#main-div #org_spec_level_filter').html(html);
+            }
+        });
+
+        $('.modal-content').draggable();
+        
+                    $('body').on('keypress', '#request_search', function (e) {
+                try {
+
+                    if (e.keyCode == 13) {
+                        var keyword = $('#request_search').val();
+                        if (keyword.trim().length > 2) {
+                            $('.btn-load-more').removeAttr('data-page');
+                            Hsis.Proxy.getRequest('', 'keyword=' + keyword, function(data) {});
+                        } else if (keyword.trim().length == 0) {
+                            $('.btn-load-more').removeAttr('data-page');
+                            Hsis.Proxy.getRequest('', 'keyword=' + keyword, function(data) {});
+                        }
+                        return false
+                    }
+                   
+                } catch (err) {
+                    console.error(err);
+                }
+            });
+
+                $('body').on('click', '.filter', function () {
+                $('.filter-for-lastdate').modal();
+
+            });
+            
+        Hsis.Proxy.loadDictionariesByTypeId(Hsis.Codes.STATUS, 0, function (status) {
+            var html = Hsis.Service.parseDictionaryForSelect(status);
+            $('#status').html(html);
+            $('#status option:first-child').text('Status')
+
+            });
+        
+        Hsis.Proxy.getStructureListByFilter(0, 0, function(data) {
+            if(data) {
+                var html = '';
+                var uni = data.universityList;
+                var uniCount = data.universityList.length;
+              
+                if(uniCount <= 1) {
+                    $('#uni').attr('disabled', 'disabled')
+                    $.each(uni, function(i, v){
+                 
+                        html += '<option value = "'+v.id+'">'+v.name[Hsis.lang]+'</option>'
+                    })
+                    $('#uni').html(html)
+                } else {
+                    html = '<option value = "0">Universitet</option>'
+                    $.each(uni, function(i, v){
+
+                        html += '<option value = "'+v.id+'">'+v.name[Hsis.lang]+'</option>'
+                    })
+                    $('#uni').html(html)
+                }               
+            }
+            
+        });
+        
+    });
+
+</script>
+

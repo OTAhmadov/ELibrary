@@ -5,7 +5,7 @@
  */
 
 var Hsis = {
-    token: '0c54827ae46b434194ef0317f4ea5230bd8ae6ad1f1146e9b2a9b122052c5cc7',
+    // token: 'b2b35e6683f9415e927efe01c998b55c5243f0e59853443e9cdceb2f147c8237',
     lang: 'az',
     appId: 1000012,
     currModule: '',
@@ -1614,9 +1614,9 @@ var Hsis = {
                                 try {
                                     if (data.data) {
                                         var user = data.data;
-                                        $('.profile-data li[data-type="name"]').text(user.person.name + ' ' + user.person.surname + ' ' + user.person.patronymic);
-                                        $('.profile-data li[data-type="role"]').text(user.role.value[Hsis.lang]);
-                                        $('.profile-data li[data-type="org"]').text(user.structure.name[Hsis.lang]);
+                                        $('.user-notify-content h6[data-type="name"]').text(user.person.name + ' ' + user.person.surname + ' ' + user.person.patronymic);
+                                        $('.user-notify-content p[data-type="role"]').text(user.role.value[Hsis.lang]);
+                                        $('.user-notify-content p[data-type="org"]').text(user.structure.name[Hsis.lang]);
                                         $('.side-title-block p').text(user.orgName.value[Hsis.lang]);
                                         $('.main-img').attr('src', Hsis.urls.AdminRest + 'users/' + user.id + '/image?token=' + Hsis.token);
                                         $('.side-title-block img').attr('src', Hsis.urls.HSIS + 'structures/' + user.orgName.id + '/logo?token=' + Hsis.token);

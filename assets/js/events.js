@@ -5,6 +5,9 @@
  */
 
 $(function () {
+
+    $('.iframeUpdate').attr("src", "http://192.168.1.78:8082/Main/#/profile-edit?token="+ Hsis.token);
+
     var chosenLang;
 
     if (document.cookie.indexOf('lang') == -1) {

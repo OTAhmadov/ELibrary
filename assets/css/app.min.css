@@ -19699,8 +19699,8 @@ a.fc-more:hover {
     width: 60px;
     height: 60px;
     overflow: hidden;
-    border-radius: 50%;
-    border: 1px solid grey;
+    /*border-radius: 50%;*/
+    /*border: 1px solid grey;*/
     position: absolute;
     top: 12px;
     left: 12px;

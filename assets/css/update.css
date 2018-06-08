@@ -34,12 +34,12 @@
 
 
 header.header-upd{
-	height: 55px;
+	height: 40px;
 	background-color: #338bf8;
 }
 .logo-upd{
 	display: inline-block;
-	padding: 19px 0 0 0;
+	padding: 10px 0 0 0;
 }
 .logo-upd img{
 	height: 21px;
@@ -56,11 +56,11 @@ header.header-upd{
   width: 30px;
   height: 30px;
   border: solid 4px #ffffff;
-  margin: 13px 0 0 0;
+  margin: 3px 0 0 0;
   float: left;
 }
 .main-img-top{
-	margin-top: 13px !important;
+	/*margin-top: 13px !important;*/
 }
 .content-upper-header .main-img img{
 	position: static;
@@ -142,10 +142,11 @@ main.main-upd{
 	height: auto;
 }
 .app-con li{
-	padding: 0 10px;
-	width: 109px;
-	height: 55px;
-	line-height: 55px;
+	/*padding: 0 10px;*/
+	/*width: 109px;*/
+	height: 40px;
+	margin-right: 20px;
+	line-height: 40px;
 	text-align: center;
 }
 .app-con li a:hover:before, .app-con li a:hover:before, .app-con li.active a:before{
@@ -475,11 +476,11 @@ main.main-upd{
 	height: 17.5px;
 }
 .prepend-icon input{
-	width: 293px;
-	height: 38px;
+	width: 170px;
+	height: 32px;
 	border-radius: 100px;
 	background-color: #f3f5f9;
-	padding: 0 40px 7px 16px;
+	padding: 6px 40px 7px 16px;
 	border: none;
 	font: 300 14px/17px 'HelveticaNeue',sans-serif;
 	text-align: left;
@@ -582,7 +583,7 @@ main.main-upd{
 }
 
 .table-celled>thead>tr{
-	background-color: #f3f5f9;
+	/*background-color: #f3f5f9;*/
 	border: solid 1px #ece9fa;
 }
 .table-celled>thead>tr>th{
@@ -1048,7 +1049,7 @@ i.jstree-icon.jstree-ocl {
 	display: none;
 	float: right;
 	width: 34px;
-	margin-top: 20px;
+	margin-top: 11px;
 }
 .hide-menu i{
 	color: #fff;
@@ -1070,6 +1071,7 @@ i.jstree-icon.jstree-ocl {
 		padding: 10px 15px;
 		text-align: center;
 		margin-top: 10px;
+		margin-right: 0;
 		width: 200px;
 	}
 	div.app-list.less-menu ul.app-con{
@@ -1849,7 +1851,7 @@ button.filter:active, .button.filter:focus {
 }
 .notify-wrapper {
 	position: absolute;
-	top: 3%;
+	top: -8px;
 	right: -2px;
 }
 
@@ -1868,7 +1870,7 @@ button {
 }
 
 button:hover {
-	background-color: #2487c9;
+	/*background-color: #2487c9;*/
 }
 
 /* Notifications */
@@ -2047,9 +2049,10 @@ li.ems-tab.active>a,li.ems-tab.active>a:hover, li.ems-tab.active>a:focus{
 	width: 80px;
 	height: 80px;
 	overflow: hidden;
-	border-radius: 50%;
-	border: 1px solid grey;
+	border-radius: 4px !important;
+	/*border: 1px solid grey;*/
 	position: absolute;
+
 	top: 30px;
 	left: 20px;
 }
@@ -2113,3 +2116,7 @@ li.ems-tab.active>a,li.ems-tab.active>a:hover, li.ems-tab.active>a:focus{
 /*.nav>li>a:hover{*/
 	/*background-color: transparent;*/
 /*}*/
+
+.left-menu{
+	top: 10px;
+}

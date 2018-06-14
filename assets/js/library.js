@@ -5,7 +5,7 @@
  */
 
 var Hsis = {
-    // token: '2d60cc07d3494e329176d75357d636cc3f8214d810614f148640ab101e78ede2',
+    token: '0ff7f2ca9aa34b8b84c04d0a566af76a2ca76a1f2f014356a5d9125afd5db6a3',
     lang: 'az',
     appId: 1000012,
     currModule: '',

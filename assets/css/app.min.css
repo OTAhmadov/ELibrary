@@ -19724,7 +19724,7 @@ a.fc-more:hover {
     height: 100vh;
     position: absolute;
     right: -500px;
-    top: 55px;
+    top: 50px;
     z-index: 999;
     background-color: white;
     transition: ease-in-out 500ms;
@@ -20827,19 +20827,19 @@ textarea {
 }
 
 .add-new img {
-    transition: scale 300ms ease-in-out;
+    /*transition: scale 300ms ease-in-out;*/
 }
 
 .add-new:hover img {
-    transform: scale(1.25);
+    /*transform: scale(1.25);*/
 }
 
 .save-button img {
-    transition: scale 300ms ease-in-out;
+    /*transition: scale 300ms ease-in-out;*/
 }
 
 .save-button:hover img {
-    transform: scale(1.25);
+    /*transform: scale(1.25);*/
 }
 
 .content-filters .modal-content {

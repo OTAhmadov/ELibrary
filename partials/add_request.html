@@ -161,8 +161,8 @@
             Hsis.i18n();
             $('.datepicker').datepicker();
 
-            $('body').on('click', '.close-add-resource', function () {
-
+            $('body').on('click', '.close-add-resource', function (e) {
+            e.preventDefault();
                 $('.add-new').css('right', '-100%');
                 return false
             });

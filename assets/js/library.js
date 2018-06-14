@@ -5,7 +5,7 @@
  */
 
 var Hsis = {
-    token: '0ff7f2ca9aa34b8b84c04d0a566af76a2ca76a1f2f014356a5d9125afd5db6a3',
+    token: 'c3a8352433c34efc8286031fcfbcce53c53bf915e95c471fafdcaf4cd908f6a9',
     lang: 'az',
     appId: 1000012,
     currModule: '',
@@ -20,6 +20,7 @@ var Hsis = {
     eduLevels: [],
     universities: [],
     personId: '',
+    stompClient:0,
     Codes: {
         SERIALTYPE: 1000101,
         SECTION: 1000102,
@@ -31,7 +32,7 @@ var Hsis = {
         SUBJECT: 1000085,
         USEFULNESS: 6,
         COUNTRY: 1000095,
-        RESLANG: 1000027,
+        RESLANG: 1000103,
         AUTHORS: 9,
         SCISUBJECT: 1000038,
         STATUS: 1000096,
@@ -42,8 +43,8 @@ var Hsis = {
     },
     urls: {
 //        ELIBRARY: "http://wcu.unibook.az/Library/",
-            ELIBRARY: "http://192.168.1.78:8082/Library/",
-//        ELIBRARY: "http://localhost:8080/Library/",
+//        ELIBRARY: "http://192.168.1.78:8082/Library/",
+        ELIBRARY: "http://localhost:8080/Library/",
 //        ROS: "http://wcu.unibook.az/ROS/",
         ROS: "http://192.168.1.78:8082/ROS/",
 //        AdminRest: 'http://wcu.unibook.az/AdministrationRest/',
@@ -52,7 +53,10 @@ var Hsis = {
         HSIS: "http://192.168.1.78:8082/UnibookHsisRest/",
 //          REPORT: 'http://wcu.unibook.az/ReportingRest/',
 //            REPORT: 'http://192.168.1.78:8082/ReportingRest/',
-        REPORT: 'http://localhost:8080/ReportingRest/'
+        REPORT: 'http://localhost:8080/ReportingRest/',
+        COMMUNICATION: 'http://192.168.1.78:8082/CommunicationRest/',
+        NOTIFICATION: 'http://192.168.1.78:8082/NotificationSystem/greeting.html?token=',
+        SOCKET: 'http://192.168.1.78:8082/SocketRest'
     },
     statusCodes: {
         OK: 'OK',
@@ -398,6 +402,75 @@ var Hsis = {
                 }
             })
         },
+        
+        getAuthorResourcesListForRightPanel: function (id, callback) {
+            $.ajax({
+                url: Hsis.urls.ELIBRARY + 'author/' + id + '/resources?token=' + Hsis.token,
+                type: 'GET',
+                success: function (data) {
+                    if (data) {
+                        var autData = data.data;
+                        switch (data.code) {
+                            case Hsis.statusCodes.OK:
+                                callback(Hsis.Service.parseAuthorResourcesListForRightPanel(autData));
+                                break;
+                            case Hsis.statusCodes.INVALID_PARAMS:
+                                break;
+                            case Hsis.statusCodes.ERROR:
+                                if (data.message) {
+                                    $.notify(data.message[Hsis.lang], {
+                                        type: 'danger'
+                                    });
+                                } else {
+                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                        type: 'danger'
+                                    });
+                                }
+                                break;
+                            case Hsis.statusCodes.UNAUTHORIZED:
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+
+                        }
+                    }
+                },
+            });
+        },
+        
+        getResourceAuthorsListForRightPanel: function (id, callback) {
+            $.ajax({
+                url: Hsis.urls.ELIBRARY + 'resource/' + id + '/authors?token=' + Hsis.token,
+                type: 'GET',
+                success: function (data) {
+                    if (data) {
+                        var autData = data.data;
+                        switch (data.code) {
+                            case Hsis.statusCodes.OK:
+                                callback(Hsis.Service.parseResourceAuthorsListForRightPanel(autData));
+                                
+                                break;
+                            case Hsis.statusCodes.INVALID_PARAMS:
+                                break;
+                            case Hsis.statusCodes.ERROR:
+                                if (data.message) {
+                                    $.notify(data.message[Hsis.lang], {
+                                        type: 'danger'
+                                    });
+                                } else {
+                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
+                                        type: 'danger'
+                                    });
+                                }
+                                break;
+                            case Hsis.statusCodes.UNAUTHORIZED:
+                                window.location = Hsis.urls.ROS + 'unauthorized';
+                                break;
+
+                        }
+                    }
+                },
+            });
+        },
 
         getRequestDetails: function (id, callback) {
             $.ajax({
@@ -455,31 +528,11 @@ var Hsis = {
                         }
                         var b = ''
                         $.each(authors, function (i, v) {
-//                                var resourceName = "";
-//                                $.each(v.resourceNames, function (j, k) {
-//                                    if (k.resourceName != "") {
-//                                        resourceName += ((v.resourceNames.length == 1 || j == v.resourceNames.length - 1) ? k.resourceName[Hsis.lang] : k.resourceName[Hsis.lang] + ',');
-//                                        }
-//                                    }
-//                                );
-// b += '<div> \n\
-//                                        <div class="row">\n\
-//                                        <div class="col-sm-12">\n\
-//                                        <div data-id="' + v.id + '" data-rename="' + v.authorName + '" class="book-info-block"><div class="book-operations">' + Hsis.Service.parseOperations(Hsis.operationList, '2', v) + '</div>' +
-//                                    '<div class="divinbashi"> <div><h4 class="aut-name">' + v.authorName[Hsis.lang] + '</h4>' +
-//                                    '<p class="death">' + '(' + v.birthDeath + ')' + ' ' + v.birthPlace.value[Hsis.lang] + ' </p></div>' +
-//                                    '<div id="divinortasi"><img class="author-photo" src="' + Hsis.urls.ELIBRARY + '/authors/' + v.id + '/image/?token=' + Hsis.token + '">' +
-//                                    '<div><p id="abouta"><b>Haqq?nda:</b> <span>' + v.about + '</span></p>' +
-//                                    '<p><b>?s?rl?ri:</b> ' + v.resourceNames + '</p>' +
-//                                    '</div></div>' +
-//                                    '</div></div></div>' +
-//                                    '</div>' +
-//                                    '</div>'
-                                b += '<tr data-id="' + v.id + '" data-about="' + v.about + '" data-resources="' + v.resourceNames + '" class="book-info-block">' +
-                                    '<td></td>' +
 
+                                b += '<tr data-id="' + v.id + '" data-about="' + v.about + '" class="book-info-block">' +
+                                    '<td></td>' +
                                     '<td>' + v.authorName[Hsis.lang] + '</td>' +
-                                    '<td>' + v.resourceNames.substring(0, 30) + '</td>' +
+//                                    '<td>' + v.resourceNames.substring(0, 30) + '</td>' +
                                     '<td>' + v.birthPlace.value[Hsis.lang] + '</td>' +
                                     '<td>' + v.birthDeath + '</td>' +
                                     '<td></td>' +
@@ -923,11 +976,7 @@ var Hsis = {
                             }
                         );
 
-                            b += '<tr data-id="' + v.id + '" data-rename="' + v.resourcesName + '" data-format-value="' + v.format.value[Hsis.lang] + '" data-format-code="' + v.format.code.value[Hsis.lang] + '"\n\
-                                    data-format="' + v.format.id + '" data-place-value="' + v.publishPlace + '" data-isbn="' + v.isbn + '"\n\
-                                    data-file-id="' + (v.fileWrapper == null ? 0 : v.fileWrapper.id) + '" data-publishdate="' + v.publishDate + '" data-lang="' + v.langId.value[Hsis.lang] + '" \n\
-                                    data-content-value="' + v.content.value[Hsis.lang] + '" data-subject-value="' + v.subject.value[Hsis.lang] + '" data-bibdesc-value="' + v.bibdesc.value[Hsis.lang] + '"\n\
-                                    data-rescount="' + v.resCount + '" data-pagecount="' + v.pageCount + '" class="book-info-block">' +
+                            b += '<tr data-id="' + v.id + '" class="book-info-block">' +
                                     '<td></td>' +
                                     '<td>' + v.resourcesName + '</td>' +
                                     '<td>' + authorName + '</td>' +
@@ -1614,9 +1663,9 @@ var Hsis = {
                                 try {
                                     if (data.data) {
                                         var user = data.data;
-                                        $('.user-notify-content h6[data-type="name"]').text(user.person.name + ' ' + user.person.surname + ' ' + user.person.patronymic);
-                                        $('.user-notify-content p[data-type="role"]').text(user.role.value[Hsis.lang]);
-                                        $('.user-notify-content p[data-type="org"]').text(user.structure.name[Hsis.lang]);
+                                        $('.profile-data li[data-type="name"]').text(user.person.name + ' ' + user.person.surname + ' ' + user.person.patronymic);
+                                        $('.profile-data li[data-type="role"]').text(user.role.value[Hsis.lang]);
+                                        $('.profile-data li[data-type="org"]').text(user.structure.name[Hsis.lang]);
                                         $('.side-title-block p').text(user.orgName.value[Hsis.lang]);
                                         $('.main-img').attr('src', Hsis.urls.AdminRest + 'users/' + user.id + '/image?token=' + Hsis.token);
                                         $('.side-title-block img').attr('src', Hsis.urls.HSIS + 'structures/' + user.orgName.id + '/logo?token=' + Hsis.token);
@@ -2304,7 +2353,6 @@ var Hsis = {
                     $('[data-toggle="tooltip"]').tooltip();
 
                     var moduleListItems = $('body').find('.app-con li');
-                    console.log(moduleListItems)
                     if(moduleListItems.length>5){
                         $('body').find('div.app-list, .hide-menu').addClass('less-menu')
                     }else{
@@ -2375,6 +2423,28 @@ var Hsis = {
             return html;
         },
 
+        parseResourceAuthorsListForRightPanel: function (data) {
+            var html = '';
+            if (data) {
+                $.each(data, function (i, v) {
+                    html += '<p class="authorlist">' + ++i + '. ' + v.authorName[Hsis.lang] + '</p>';
+                });
+
+            }
+            return html;
+        },
+
+        parseAuthorResourcesListForRightPanel: function (data) {
+            var html = '';
+            if (data) {
+                $.each(data.data, function (i, v) {
+                    html += '<p>' + ++i + '. ' + v.resourcesName + '</p>';
+                });
+
+            }
+            return html;
+        },
+        
         parseDictionaryForSelect: function (data) {
             var html = '<option value="0">' + Hsis.dictionary[Hsis.lang]["select"] + '</option>';
             if (data) {
@@ -2482,7 +2552,31 @@ var Hsis = {
                 return false;
             }
         }
-    }
+    },
+    WebSocket: {
+            
+           connect: function () {
+                var name = $('.namename').val();
+                var socket = new SockJS(Hsis.urls.SOCKET + '/chat');
+                Hsis.stompClient = Stomp.over(socket);
+                Hsis.stompClient.connect({'Login':Hsis.token}, function (frame) {
+                    var sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
+                    Hsis.stompClient.subscribe('/topic/messages/' + sessionId, function (messageOutput) {
+                            $('body .notification').removeClass('hidden');
+                            
+                    });
+                });
+            },
+
+            disconnect: function (a) {
+                if (Hsis.stompClient != 0) {
+                    Hsis.stompClient.disconnect();
+                }
+                if(a==1) {
+                    Hsis.WebSocket.connect();
+                }
+            },
+    },
 
 };
 
@@ -2490,127 +2584,3 @@ var fileTypes = {
     IMAGE_CONTENT_TYPE: '^(' + Hsis.REGEX.IMAGE_EXPRESSION + ')$',
     FILE_CONTENT_TYPE: '^(' + Hsis.REGEX.TEXT + '|' + Hsis.REGEX.PDF + '|' + Hsis.REGEX.XLS + '|' + Hsis.REGEX.XLSX + '|' + Hsis.REGEX.DOC + '|' + Hsis.REGEX.DOCX + '|' + Hsis.REGEX.IMAGE_EXPRESSION + ')$'
 };
-
-
-//        loadDictionaryListByTypeId: function (typeId, callback) {
-//        $.ajax({
-//            url: Hsis.urls.ELIBRARY + 'settings/dictype/' + typeId + '/dictionary?token=' + Hsis.token,
-//            type: 'GET',
-//            success: function (result) {
-//                try {
-//                    if (result) {
-//                    switch (result.code) {
-//                        case Hsis.statusCodes.OK:
-//                                 
-//                                     if (callback) {
-//                                     callback(result.data);
-//                                }
-//                                var a = ''
-//                                    $.each(result.data, function (i, v) {
-//                                        a += '<tr data-type-id="'+v.id+'">' +
-//                                                '<td>' + v.id + '</td>' +
-//                                                '<td>' + v.name[Hsis.lang] + '</td>' +
-//                                                '<td>' + v.updateDate + '</td>' +
-//                                             '</tr>'
-//                                          })     
-//                                    $('body').find('#dictionary-table tbody').html(a);
-//                                    
-//                                case Hsis.statusCodes.ERROR:
-//                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
-//                                        type: 'danger'
-//                                    });
-//                                    break;
-//                                    
-//                                case Hsis.statusCodes.UNAUTHORIZED:
-//
-//                                    window.location = Hsis.urls.ROS + 'unauthorized';
-//                                    break;
-//                        }
-//                    }
-//                } catch (err) {
-//                        console.error(err);
-//                    }
-//                }
-//    
-//            })           
-//        },
-
-//        loadDictionaryTypeList: function (callback) {
-//        $.ajax({
-//            url: Hsis.urls.ELIBRARY + 'settings/dictionary/type?token=' + Hsis.token,
-//            type: 'GET',
-//            success: function (result) {
-//                try {
-//                    if (result) {
-//                    switch (result.code) {
-//                        case Hsis.statusCodes.OK:
-//                                 
-//                                     if (callback) {
-//                                     callback(result.data);
-//                                }
-//                                var a = ''
-//                                    $.each(result.data, function (i, v) {
-//                                        a += '<tr data-type-id="'+v.id+'">' +
-//                                                '<td>' + v.code+ '</td>' +
-//                                                '<td>' + v.dictionary[Hsis.lang] + '</td>' +
-//                                             '</tr>'
-//                                          })     
-//                                    $('body').find('#dic-type-table tbody').html(a);
-//                                    
-//                                case Hsis.statusCodes.ERROR:
-////                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
-////                                        type: 'danger'
-////                                    });
-//                                    break;
-//                                    
-//                                case Hsis.statusCodes.UNAUTHORIZED:
-//
-//                                    window.location = Hsis.urls.ROS + 'unauthorized';
-//                                    break;
-//                        }
-//                    }
-//                } catch (err) {
-//                        console.error(err);
-//                    }
-//                }
-//    
-//            })           
-//        },
-
-//        loadDictionariesByTypeId: function (typeId, parentId, callback) {
-//            var result = {};
-//            $.ajax({
-//                url: Hsis.urls.AdminRest + 'settings/dictionaries?typeId=' + typeId + '&parentId=' + parentId + '&token=' + Hsis.token,
-//                type: 'GET',
-//                global: false,
-//                success: function (data) {
-//                    try {
-//                        if (data) {
-//                            switch (data.code) {
-//                                case Hsis.statusCodes.OK:
-//                                    result = data.data;
-//                                    break;
-//
-//                                case Hsis.statusCodes.ERROR:
-//                                    $.notify(Hsis.dictionary[Hsis.lang]['error'], {
-//                                        type: 'danger'
-//                                    });
-//                                    break;
-//
-//                                case Hsis.statusCodes.UNAUTHORIZED:
-//
-//                                    window.location = Hsis.urls.ROS + 'unauthorized';
-//                                    break;
-//                            }
-//                        }
-//                    } catch (err) {
-//                        console.error(err);
-//                    }
-//                },
-//                complete: function () {
-//
-//                    callback(result);
-//                }
-//
-//            });
-//        },

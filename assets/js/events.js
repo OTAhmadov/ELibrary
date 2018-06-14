@@ -5,9 +5,6 @@
  */
 
 $(function () {
-
-    $('.iframeUpdate').attr("src", "http://192.168.1.78:8082/Main/#/profile-edit?token="+ Hsis.token);
-
     var chosenLang;
 
     if (document.cookie.indexOf('lang') == -1) {
@@ -74,6 +71,8 @@ $(function () {
 
     Hsis.Proxy.loadApplications();
 
+    $('.get_notification_page').attr('href', Hsis.urls.NOTIFICATION  + Hsis.token);
+    
     Hsis.Proxy.loadModules(function (modules) {
         $('ul.module .mod-con').prepend(Hsis.Service.parseModules(modules));
         $('.module-list').html(Hsis.Service.parseModules(modules));
@@ -1747,8 +1746,7 @@ $(function () {
         }
 
     });
-    
-        
+            
     $('body').on('click', '.edit-page-res', '#confirmAddRes', function () {
         var allValid = true;
         var resId = $('body').attr('data-resource-id')
@@ -1775,7 +1773,6 @@ $(function () {
                     filePath:imagePath,
                     token: Hsis.token
                 };
-                        console.log(resource)
                 var wrongFiles = '';
                 if ($('.new-add-doc-file')[0].files[0]) {
 
@@ -2263,7 +2260,7 @@ $(function () {
                     type: 'warning'
                 });
                 return false;
-            }
+            }       
             $.confirm({
                 title: Hsis.dictionary[Hsis.lang]['warning'],
                 content: Hsis.dictionary[Hsis.lang]['delete_info'],
@@ -2416,8 +2413,8 @@ $(function () {
 
                 Hsis.Proxy.removeAuthor(id, function () {
                     Hsis.Proxy.getAuthorsList();
-                     $('body').find('.col-sm-4.aut-info').fadeOut();
-        $('body').find('.col-sm-8.data').removeClass('col-sm-8').addClass('col-sm-12'); 
+                    $('body').find('.col-sm-4.aut-info').fadeOut();
+                    $('body').find('.col-sm-8.data').removeClass('col-sm-8').addClass('col-sm-12'); 
                 });
             },
             theme: 'black'
@@ -2633,42 +2630,80 @@ $(function () {
     $('body').on('click', '#restable tbody tr', function (e) {
         try {
             var id = $(this).attr('data-id');
-            var formatId = $(this).attr('data-format-value');
-            var format = $(this).attr('data-format');
-            var formatCode = $(this).attr('data-format-code');
-            var placeId = $(this).attr('data-place-value');
-            var publishDate = $(this).attr('data-publishdate');
-            var langId = $(this).attr('data-lang');
-            var contentId = $(this).attr('data-content-value');
-            var subjectId = $(this).attr('data-subject-value');
-            var bibdescId = $(this).attr('data-bibdesc-value');
-            var pageCount = $(this).attr('data-pagecount');
-            var fileId = $(this).attr('data-file-id');
-            if (fileId!=0 && (formatCode == Hsis.Codes.PDF_FORMAT)) {
-                $('body').find('.res-info .faylyukleyen').removeClass('hidden');
-            }else{
-                $('body').find('.res-info .faylyukleyen').addClass('hidden');
-            }
+//            var formatId = $(this).attr('data-format-value');
+//            var format = $(this).attr('data-format');
+//            var formatCode = $(this).attr('data-format-code');
+//            var placeId = $(this).attr('data-place-value');
+//            var publishDate = $(this).attr('data-publishdate');
+//            var langId = $(this).attr('data-lang');
+//            var contentId = $(this).attr('data-content-value');
+//            var subjectId = $(this).attr('data-subject-value');
+//            var bibdescId = $(this).attr('data-bibdesc-value');
+//            var pageCount = $(this).attr('data-pagecount');
+//            var fileId = $(this).attr('data-file-id');
+//            if (fileId!=0 && (formatCode == Hsis.Codes.PDF_FORMAT)) {
+//                $('body').find('.res-info .faylyukleyen').removeClass('hidden');
+//            }else{
+//                $('body').find('.res-info .faylyukleyen').addClass('hidden');
+//            }
 //            var fileId = $(this).attr('data-file-id');
 //            if (fileId!=0 && format==1008043) {
 //                $('body').find('.res-info .faylyukleyen').removeClass('hidden');
 //            }else{
 //                $('body').find('.res-info .faylyukleyen').addClass('hidden');
 //            }
+
+            Hsis.Proxy.getResourceDetails(id, function (data) {
+                var fileId = data.fileWrapper == null ? 0 : data.fileWrapper.id;
+                $('body').find('.col-sm-4.res-info').attr('data-file-id', fileId);
+                if (data) {
+                    if (fileId!=0 && (data.format.code.value[Hsis.lang] == Hsis.Codes.PDF_FORMAT)) {
+                        setTimeout(function () {
+                            $('body').find('.res-info .faylyukleyen').removeClass('hidden');
+                        }, 100)
+                    }else{
+                        $('body').find('.res-info .faylyukleyen').addClass('hidden');
+                    }
+                    if (fileId!=0 && data.format==1008043) {
+                        $('body').find('.res-info .faylyukleyen').removeClass('hidden');
+                    }else{
+                        $('body').find('.res-info .faylyukleyen').addClass('hidden');
+                    }
+
+                    $('body').find('.langspan').html(data.langId.value[Hsis.lang]);
+                    $('body').find('.pagecountspan').html(data.pageCount);
+                    $('body').find('.bibdesspan').html(data.bibdesc.value[Hsis.lang]);
+                    $('body').find('.subjectspan').html(data.subject.value[Hsis.lang]);
+                    $('body').find('.contentspan').html(data.content.value[Hsis.lang]);
+                    $('body').find('.formatspan').html(data.format.value[Hsis.lang]);
+                    $('body').find('.placespan').html(data.publishPlace)
+                    $('body').find('.datespan').html(data.publishDate);
+                    Hsis.Proxy.getResourceAuthorsListForRightPanel(id, function (callback) {
+                        if(callback){
+                            $('body').find('.authorlist').html(callback);
+                        }else{
+                            $('body').find('.authorlist').html('');
+                        }
+                    })
+                
+                }
+            })
             $('.type_2_btns').html(Hsis.Service.parseOperations(Hsis.operationList, '2'))
 
-            $('body').find('.info-item.student-name span.langspan').html(langId);
-            $('body').find('.info-item.student-name span.placespan').html(placeId);
-            $('body').find('.info-item.student-name span.datespan').html(publishDate);
-            $('body').find('.info-item.student-name span.formatspan').html(formatId);
-            $('body').find('.info-item.student-name span.contentspan').html(contentId);
-            $('body').find('.info-item.student-name span.subjectspan').html(subjectId);
-            $('body').find('.info-item.student-name span.bibdesspan').html(bibdescId);
-            $('body').find('.info-item.student-name span.pagecountspan').html(pageCount);
-            
-            $('body').find('.col-sm-12.restablediv').removeClass('col-sm-12').addClass('col-sm-8');
-            $('body').find('.col-sm-4.res-info').fadeIn(1).css('right', '0').attr('data-id', id);
-            $('body').find('.col-sm-4.res-info').attr('data-file-id', fileId);
+//            $('body').find('.info-item.student-name span.langspan').html(langId);
+//            $('body').find('.info-item.student-name span.placespan').html(placeId);
+//            $('body').find('.info-item.student-name span.datespan').html(publishDate);
+//            $('body').find('.info-item.student-name span.formatspan').html(formatId);
+//            $('body').find('.info-item.student-name span.contentspan').html(contentId);
+//            $('body').find('.info-item.student-name span.subjectspan').html(subjectId);
+//            $('body').find('.info-item.student-name span.bibdesspan').html(bibdescId);
+//            $('body').find('.info-item.student-name span.pagecountspan').html(pageCount);
+            setTimeout(function () {
+                $('body').find('.col-sm-4.res-info').fadeIn(1).css('right', '0').attr('data-id', id);
+                $('body').find('.col-sm-12.restablediv').removeClass('col-sm-12').addClass('col-sm-8');
+            }, 700)
+
+//            $('body').find('.col-sm-4.res-info').attr('data-file-id', fileId);
             $('body').find('#restable tr').removeClass('active');
             $('body').find('.resource_file').attr('href', Hsis.urls.ELIBRARY + 'resources/'+ id +'/image?token=' + Hsis.token ? Hsis.urls.ELIBRARY + 'resources/'+ id +'/image?token=' + Hsis.token : '#')
             
@@ -2683,20 +2718,24 @@ $(function () {
         try {
             var id = $(this).attr('data-id');
             var haqqinda = $(this).attr('data-about');
-            var eserleri = $(this).attr('data-resources');
-            var res = eserleri.split(", ");
-            var html = '';
-            $.each(res, function (i, v) {
-                    html +=
-                            '<p>' + ++i + '. ' + v + '</p>'
-
-                })
-            
+//            var eserleri = $(this).attr('data-resources');
+//            var res = eserleri.split(", ");
+//            var html = '';
+//            $.each(res, function (i, v) {
+//                    html +=
+//                            '<p>' + ++i + '. ' + v + '</p>'
+//
+//                })
+            Hsis.Proxy.getAuthorResourcesListForRightPanel(id, function (callback) {
+                if(callback){
+                    $('body').find('.student-name').html(callback);
+                }
+            });
             $('.muellifshekli').removeClass('hidden')
             $('.type_2_btns').html(Hsis.Service.parseOperations(Hsis.operationList, '2'))
 
             $('body').find('.info-item.student-name span.haqqinda').html(haqqinda);
-            $('body').find('.info-item.student-name span.eserleri').html(html);
+//            $('body').find('.info-item.student-name span.eserleri').html(html);
             $('body').find('.muellifshekli-lightbox').attr('href', Hsis.urls.ELIBRARY + 'authors/'+ id +'/image?token=' + Hsis.token)
             $('body').find('.muellifshekli').attr('src', Hsis.urls.ELIBRARY + 'authors/'+ id +'/image?token=' + Hsis.token)
             $('body').find('img.muellifshekli').on('error', function () {
@@ -2758,7 +2797,7 @@ $(function () {
             var reqParams = $('.request-filt-form').serialize();
 
             $btn.prop('disabled', true);
-            if (typeTable == 'catalogue') {
+            if (typeTable == 'catalogue') {     
            
                 Hsis.Proxy.getResources(page, resParams, function (data) {
                      $btn.attr('data-page', parseInt(page) + 1);
@@ -3144,10 +3183,6 @@ $(function () {
                 $('.app-list').hide();
             });
         }
-    });
-
-    $(".main-img").on("click", function () {
-        $('.user-info').toggleClass("helloWorld");
     });
  
 });

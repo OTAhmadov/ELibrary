@@ -1126,7 +1126,7 @@
     /* display: inline-block; */
     position: relative;
     right: 90px;
-    /*top: -55px;*/
+    top: -55px;
     height: 100%;
 }
 .app-con{
@@ -1136,7 +1136,7 @@
 }
 .app-con li{
     float: left;
-    /*padding: 0 15px;*/
+    padding: 0 15px;
 }
 .app-con li a{
     font-size: 13px;
